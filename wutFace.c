@@ -1,33 +1,8 @@
-//#include "ft_printf.h"
+#include "ft_printf.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
 
-void		ft_putstr(char *str)
-{
-	while (*str)
-	{
-		write(1, &(*str), 1);
-		*str++;
-	}
-}
-
-void		ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void		ft_putnbr(long long int n)
-{
-	if (n < 0)
-	{
-		ft_putchar('-');
-		n = -n;
-	}
-	if (n > 9)
-		ft_putnbr(n / 10);
-	ft_putchar(n % 10 + '0');
-}
 int		ft_printf(const char *fmt, ...)
 {
 	va_list arg;
@@ -40,21 +15,7 @@ int		ft_printf(const char *fmt, ...)
 		if(*fmt == '%')
 		{
 			*fmt++;
-			if (*fmt == 'c')
-			{
-				c = va_arg(arg, int);
-				write(1, &c, 1);
-			}
-			if (*fmt == 's')
-			{
-				s = va_arg(arg, char*);
-				ft_putstr(s);
-			}
-			if (*fmt == 'd')
-			{
-				c = va_arg(arg, int);
-				ft_putnbr(c);
-			}
+			ultimate_handler(*fmt, arg);
 			*fmt++;
 		}
 		else
@@ -70,6 +31,8 @@ int		ft_printf(const char *fmt, ...)
 
 int		main()
 {
-	ft_printf("%smamamia\n %c%c%s%d", "rari", 'w', 'a', "tratata", 1234567);
-	printf("%smamamia\n %c%c%s%d", "rari", 'w', 'a', "tratata", 12345671234567812345678123456789);
+	ft_printf("%smamamia %c%c%s%u\n", "rari", 'w', 'a', "tratata", 2147483647);
+	printf("%smamamia %c%c%s%o\n", "rari", 'w', 'a', "tratata", 2147483647);
+//	printf("%D", 0xa);
+
 }
