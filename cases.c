@@ -26,6 +26,16 @@ void		ultimate_handler(char c, va_list arg)
 		j = va_arg(arg, unsigned int);
 		ft_putunbr(j);
 	}
+	if (c == 'o')
+	{
+		i = va_arg(arg, int);
+		ft_putnbr(ft_dectooct(i));
+	}
+	if (c == 'x')
+	{
+		i = va_arg(arg, int);
+		ft_dectohex(i);
+	}
 	else
 		return ;
 }

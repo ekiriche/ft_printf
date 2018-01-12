@@ -31,8 +31,8 @@ int		ft_printf(const char *fmt, ...)
 
 int		main()
 {
-	ft_printf("%smamamia %c%c%s%u\n", "rari", 'w', 'a', "tratata", 2147483647);
-	printf("%smamamia %c%c%s%o\n", "rari", 'w', 'a', "tratata", 2147483647);
+	ft_printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
+	printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
 //	printf("%D", 0xa);
 
 }
