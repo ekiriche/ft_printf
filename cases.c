@@ -36,6 +36,8 @@ void		ultimate_handler(char c, va_list arg)
 		i = va_arg(arg, int);
 		ft_dectohex(i);
 	}
+	if (c == '%')
+		ft_putchar('%');
 	else
 		return ;
 }
