@@ -34,7 +34,12 @@ int		main()
 //	ft_printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
 //	printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
 //	printf("%D", 0xa);
-	ft_printf("%%\n");
-	printf("%%\n");
+//	ft_printf("%%\n");
+//	printf("%hhi\n", 214);
 //	printf("%hd%d", 127, 7500);
+	//printf("%#X", 127);
+//	ft_printf("%i %d\n", 033, 033);
+//	printf("%i %d\n", 033, 033);
+	ft_printf("%x %X\n", 214748364, 214748364);
+	printf("%x %X\n", 214748364, 214748364);
 }

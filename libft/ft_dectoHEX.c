@@ -1,9 +1,11 @@
 #include "libft.h"
-void            ft_dectohex(int n)
+
+void	ft_dectoHEX(int n)
 {
-	int     temp;
-	int     i;
-	char    ans[100];
+	int	temp;
+	int	i;
+	char	ans[100];
+
 	i = -1;
 	while (n != 0)
 	{
@@ -16,10 +18,7 @@ void            ft_dectohex(int n)
 	}
 	while (i >= 0)
 	{
-		if (ans[i] >= '0' && ans[i] <= '9')
-			write(1, &ans[i], 1);
-		else
-			ft_putchar(ans[i] + 32);
+		write(1, &ans[i], 1);
 		i--;
 	}
 }

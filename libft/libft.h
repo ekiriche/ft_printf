@@ -24,6 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+void				ft_dectoHEX(int nbr);
 void				ft_dectohex(int n);
 int				ft_dectooct(int num);
 void				ft_putunbr(unsigned int n);

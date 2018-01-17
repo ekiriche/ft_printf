@@ -6,6 +6,16 @@ void		ultimate_handler(char c, va_list arg)
 	char		*s;
 	unsigned int	j;
 
+	if (c == 'X')
+	{
+		i = va_arg(arg, int);
+		ft_dectoHEX(i);
+	}
+	if (c == 'p')
+	{
+		s = va_arg(arg, char*);
+		;
+	}
 	if (c == 'c')
 	{
 		i = va_arg(arg, int);
