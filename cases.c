@@ -9,12 +9,7 @@ void		ultimate_handler(char c, va_list arg)
 	if (c == 'X')
 	{
 		i = va_arg(arg, int);
-		ft_dectoHEX(i);
-	}
-	if (c == 'p')
-	{
-		s = va_arg(arg, char*);
-		;
+		ft_dectohexsmall(i);
 	}
 	if (c == 'c')
 	{

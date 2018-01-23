@@ -29,7 +29,7 @@ int		ft_printf(const char *fmt, ...)
 	return (1);
 }
 
-int		main()
+*/int		main()
 {
 //	ft_printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
 //	printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
@@ -42,4 +42,7 @@ int		main()
 //	printf("%i %d\n", 033, 033);
 	ft_printf("%x %X\n", 214748364, 214748364);
 	printf("%x %X\n", 214748364, 214748364);
-}
+	printf("|%- 10.4d|\n", 42);
+	printf("|% 010.3hhd|\n", c);
+	
+}*/
