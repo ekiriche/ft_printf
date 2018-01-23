@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 14:08:50 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 15:47:06 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int		ft_printf(const char *fmt, ...)
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
 			printf("Format: %s\n", chunk->format);
+			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
 			while (chunk->len_format != 0)
 			{
 				*fmt++;
 				chunk->len_format--;
 			}
-			*fmt++;
 			ft_memdel((void**)&chunk->format);
 
 		}
@@ -55,7 +55,9 @@ int		ft_printf(const char *fmt, ...)
 
 int		pepePls(char c)
 {
-	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' || c == 'X' || c == 'c' || c == 'C')
+	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i'
+			|| c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
+			|| c == 'X' || c == 'c' || c == 'C')
 		return (0);
 	return (1);
 }
@@ -65,9 +67,38 @@ void	do_smth(t_format *chunk)
 	look_for_conversion(chunk);
 	look_for_precision(chunk);
 	look_for_field_width(chunk);
+	look_for_length_flag(chunk);
 	printf("Conversion: %c\n", chunk->conversion);
 	printf("Precision: %i\n", chunk->precision);
 	printf("Field-width: %i\n", chunk->field_width);
+	printf("Length flag: %s\n", chunk->length_flag);
+}
+
+void	look_for_length_flag(t_format *chunk)
+{
+	int	i;
+
+	i = chunk->len_format - 3;
+	if (i >= 0)
+	{
+		if ((chunk->format[i] == 'h' && chunk->format[i + 1] == 'h')
+				|| (chunk->format[i] == 'l' && chunk->format[i + 1] == 'l'))
+		{
+			chunk->length_flag = ft_strsub(chunk->format, i, 2);
+			return ;
+		}
+	}
+	i = chunk->len_format - 2;
+	if (i >= 0)
+	{
+		if ((chunk->format[i] == 'h' || chunk->format[i] == 'l'
+					|| chunk->format[i] == 'j' || chunk->format[i] == 'z'))
+		{
+			chunk->length_flag = ft_strsub(chunk->format, i, 1);
+			return ;
+		}
+	}
+	chunk->length_flag = ft_strdup("none");
 }
 
 void	look_for_field_width(t_format *chunk)
@@ -92,10 +123,7 @@ void	look_for_conversion(t_format *chunk)
 	int	i;
 
 	i = 0;
-	while (chunk->format[i] != 's' && chunk->format[i] != 'S' && chunk->format[i] != 'p'
-			&& chunk->format[i] != 'd'&& chunk->format[i] != 'D' && chunk->format[i] != 'i' && chunk->format[i] != 'o' && chunk->format[i] != 'O'
-			&& chunk->format[i] != 'u' && chunk->format[i] != 'U' && chunk->format[i] != 'x' && chunk->format[i] != 'X'
-			&& chunk->format[i] != 'c' && chunk->format[i] != 'C')
+	while (pepePls(chunk->format[i]))
 		i++;
 	chunk->conversion = chunk->format[i];
 }
@@ -121,10 +149,7 @@ int		size_of_chunk(const char *str)
 	int	len;
 
 	len = 0;
-	while (*str != 's' && *str != 'S' && *str != 'p' && *str != 'd'
-			&& *str != 'D' && *str != 'i' && *str != 'o' && *str != 'O'
-			&& *str != 'u' && *str != 'U' && *str != 'x' && *str != 'X'
-			&& *str != 'c' && *str != 'C')
+	while (pepePls(*str))
 	{
 		len++;
 		*str++;
@@ -146,9 +171,12 @@ int		main()
 	//	printf("%i %d\n", 033, 033);
 	//	ft_printf("%x %X\n", 214748364, 214748364);
 	//	printf("%x %X\n", 214748364, 214748364);
-	//	printf("|%- 10.4d|\n", 42);
+//		printf("|%- 10.4d|\n", 42);
 	//	printf("|% 010.3hhd|\n", c);
 	//	printf("% 10d10", 20);
 	//	printf("%.*s", 3, "abcdef");
-	ft_printf("%- 322.10d\n%s\n123", "asd");
+	//ft_printf("%- 322.10d\n%s\n123", "asd");
+//	printf("%+010d", 12345);
+//	ft_printf("%10.4lld%s%hd", "ads");
+	printf("%+     d", 123);
 }
