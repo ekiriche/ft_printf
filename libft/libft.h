@@ -6,7 +6,7 @@
 /*   By: dpolosuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 15:23:51 by dpolosuk          #+#    #+#             */
-/*   Updated: 2018/01/23 11:01:30 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:27:09 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_nbrlen(int n);
 void				ft_dectohex(int nbr);
 void				ft_dectohexsmall(int n);
 int				ft_dectooct(int num);

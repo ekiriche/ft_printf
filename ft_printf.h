@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 17:16:25 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:11:50 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
+void	print_smth(t_format *chunk, va_list arg);
 void	minus_present(t_format *chunk);
 void	plus_present(t_format *chunk);
 void	space_present(t_format *chunk);

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 17:27:28 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:49:18 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ void	zero_present(t_format *chunk)
 		}
 		i++;
 	}
+	chunk->zero = -42;
 }
 
 void	do_smth(t_format *chunk)
@@ -278,5 +279,7 @@ int		main()
 	//ft_printf("%- 322.10d\n%s\n123", "asd");
 	//	printf("%+010d", 12345);
 	//ft_printf("%+10.4lld%s%hd", "ads");
-	ft_printf("%+-# 010.43lld", 123);
+//	ft_printf("%+-# 010.43lld", 123);
+	ft_printf("%.10d\n", 123);
+//	printf("%.10d\n", 123);
 }
