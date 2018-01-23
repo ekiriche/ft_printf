@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
+/*   Updated: 2018/01/23 14:08:50 by ekiriche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdio.h>
 #include <unistd.h>
@@ -8,8 +20,6 @@ int		ft_printf(const char *fmt, ...)
 	va_list arg;
 	int	c;
 	char	*s;
-	//	char	*chunk;
-	//	int		size;
 	t_format	*chunk;
 
 	va_start(arg, fmt);
@@ -21,7 +31,7 @@ int		ft_printf(const char *fmt, ...)
 			*fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
-			printf("%s\n", chunk->format);
+			printf("Format: %s\n", chunk->format);
 			do_smth(chunk);
 			while (chunk->len_format != 0)
 			{
@@ -30,6 +40,7 @@ int		ft_printf(const char *fmt, ...)
 			}
 			*fmt++;
 			ft_memdel((void**)&chunk->format);
+
 		}
 		else
 			while (*fmt != '\0' && *fmt != '%')
@@ -42,14 +53,41 @@ int		ft_printf(const char *fmt, ...)
 	return (1);
 }
 
-void	do_smth(t_format *chunk)
+int		pepePls(char c)
 {
-	chunk->conversion = look_for_conversion(chunk);
-	chunk->precision = look_for_precision(chunk);
-	printf("%c\n", chunk->conversion);
+	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i' || c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x' || c == 'X' || c == 'c' || c == 'C')
+		return (0);
+	return (1);
 }
 
-char	look_for_conversion(t_format *chunk)
+void	do_smth(t_format *chunk)
+{
+	look_for_conversion(chunk);
+	look_for_precision(chunk);
+	look_for_field_width(chunk);
+	printf("Conversion: %c\n", chunk->conversion);
+	printf("Precision: %i\n", chunk->precision);
+	printf("Field-width: %i\n", chunk->field_width);
+}
+
+void	look_for_field_width(t_format *chunk)
+{
+	char	*ptr;
+
+	ptr = ft_strdup(chunk->format);
+	while (*ptr < '1' || *ptr > '9')
+	{
+		if (!(pepePls(*ptr)))
+		{
+			chunk->field_width = -42;
+			return ;
+		}
+		*ptr++;
+	}
+	chunk->field_width = ft_atoi(ptr);
+}
+
+void	look_for_conversion(t_format *chunk)
 {
 	int	i;
 
@@ -59,12 +97,23 @@ char	look_for_conversion(t_format *chunk)
 			&& chunk->format[i] != 'u' && chunk->format[i] != 'U' && chunk->format[i] != 'x' && chunk->format[i] != 'X'
 			&& chunk->format[i] != 'c' && chunk->format[i] != 'C')
 		i++;
-	return (chunk->format[i]);
+	chunk->conversion = chunk->format[i];
 }
 
-int		look_for_precision(t_format *chunk)
+void	look_for_precision(t_format *chunk)
 {
-	while (chunk->format
+	char *ptr;
+
+	ptr = ft_strdup(chunk->format);
+	while (*ptr != '.' && pepePls(*ptr))
+		*ptr++;
+	if (!(pepePls(*ptr)))
+	{
+		chunk->precision = -42;
+		return ;
+	}
+	*ptr++;
+	chunk->precision = ft_atoi(ptr);
 }
 
 int		size_of_chunk(const char *str)
@@ -101,5 +150,5 @@ int		main()
 	//	printf("|% 010.3hhd|\n", c);
 	//	printf("% 10d10", 20);
 	//	printf("%.*s", 3, "abcdef");
-	ft_printf("% -10.*d\n%s\n123", "asd");
+	ft_printf("%- 322.10d\n%s\n123", "asd");
 }

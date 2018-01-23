@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 12:57:17 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 14:04:40 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ typedef struct		s_format
 	char			*flag2;
 }					t_format;
 
+int		pepePls(char c);
+void	look_for_field_width(t_format *chunk);
+void	look_for_precision(t_format *chunk);
 void	do_smth(t_format *chunk);
-char	look_for_conversion(t_format *chunk);
+void	look_for_conversion(t_format *chunk);
 int		size_of_chunk(const char *str);
 int		ft_printf(char const *fmt, ...);
 void		ultimate_handler(char c, va_list arg);
