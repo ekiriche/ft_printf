@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 15:47:06 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 17:27:28 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ int		ft_printf(const char *fmt, ...)
 	{
 		if(*fmt == '%')
 		{
-			*fmt++;
+			fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
 			printf("Format: %s\n", chunk->format);
 			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
+			printf("\n");
 			while (chunk->len_format != 0)
 			{
-				*fmt++;
+				fmt++;
 				chunk->len_format--;
 			}
 			ft_memdel((void**)&chunk->format);
@@ -46,7 +47,7 @@ int		ft_printf(const char *fmt, ...)
 			while (*fmt != '\0' && *fmt != '%')
 			{
 				write(1, &(*fmt), 1);
-				*fmt++;
+				fmt++;
 			}
 	}
 	va_end(arg);
@@ -62,12 +63,111 @@ int		pepePls(char c)
 	return (1);
 }
 
+void	minus_present(t_format *chunk)
+{
+	int i;
+
+	i = 0;
+	while (pepePls(chunk->format[i]))
+	{
+		if (chunk->format[i] == '-')
+		{
+			chunk->minus = 1;
+			return ;
+		}
+		i++;
+	}
+	chunk->minus = -42;
+}
+
+void	plus_present(t_format *chunk)
+{
+	int i;
+
+	i = 0;
+	while (pepePls(chunk->format[i]))
+	{
+		if (chunk->format[i] == '+')
+		{
+			chunk->plus = 1;
+			return ;
+		}
+		i++;
+	}
+	chunk->plus = -42;
+}
+
+void	space_present(t_format *chunk)
+{
+	int i;
+
+	i = 0;
+	while (pepePls(chunk->format[i]))
+	{
+		if (chunk->format[i] == ' ')
+		{
+			chunk->space = 1;
+			return ;
+		}
+		i++;
+	}
+	chunk->space = -42;
+}
+
+void	hash_present(t_format *chunk)
+{
+	int i;
+
+	i = 0;
+	while (pepePls(chunk->format[i]))
+	{
+		if (chunk->format[i] == '#')
+		{
+			chunk->hash = 1;
+			return ;
+		}
+		i++;
+	}
+	chunk->hash = -42;
+}
+
+void	zero_present(t_format *chunk)
+{
+	int i;
+
+	i = 0;
+	while (pepePls(chunk->format[i]))
+	{
+		if (i == 0 && chunk->format[i] == '0')
+		{
+			chunk->zero = 1;
+			return ;
+		}
+		else if (chunk->format[i] == '0' && (chunk->format[i - 1] < '1' || chunk->format[i - 1] > '9'))
+		{
+			chunk->zero = 1;
+			return ;
+		}
+		i++;
+	}
+}
+
 void	do_smth(t_format *chunk)
 {
 	look_for_conversion(chunk);
 	look_for_precision(chunk);
 	look_for_field_width(chunk);
 	look_for_length_flag(chunk);
+	plus_present(chunk);
+	space_present(chunk);
+	minus_present(chunk);
+	hash_present(chunk);
+	zero_present(chunk);
+	printf("Minus: %i\n", chunk->minus);
+	printf("Space: %i\n", chunk->space);
+	printf("Plus: %i\n", chunk->plus);
+	printf("Zero: %i\n", chunk->zero);
+	printf("Hash: %i\n", chunk->hash);
 	printf("Conversion: %c\n", chunk->conversion);
 	printf("Precision: %i\n", chunk->precision);
 	printf("Field-width: %i\n", chunk->field_width);
@@ -113,7 +213,7 @@ void	look_for_field_width(t_format *chunk)
 			chunk->field_width = -42;
 			return ;
 		}
-		*ptr++;
+		ptr++;
 	}
 	chunk->field_width = ft_atoi(ptr);
 }
@@ -134,13 +234,13 @@ void	look_for_precision(t_format *chunk)
 
 	ptr = ft_strdup(chunk->format);
 	while (*ptr != '.' && pepePls(*ptr))
-		*ptr++;
+		ptr++;
 	if (!(pepePls(*ptr)))
 	{
 		chunk->precision = -42;
 		return ;
 	}
-	*ptr++;
+	ptr++;
 	chunk->precision = ft_atoi(ptr);
 }
 
@@ -152,7 +252,7 @@ int		size_of_chunk(const char *str)
 	while (pepePls(*str))
 	{
 		len++;
-		*str++;
+		str++;
 	}
 	len++;
 	return (len);
@@ -171,12 +271,12 @@ int		main()
 	//	printf("%i %d\n", 033, 033);
 	//	ft_printf("%x %X\n", 214748364, 214748364);
 	//	printf("%x %X\n", 214748364, 214748364);
-//		printf("|%- 10.4d|\n", 42);
+	//		printf("|%- 10.4d|\n", 42);
 	//	printf("|% 010.3hhd|\n", c);
 	//	printf("% 10d10", 20);
 	//	printf("%.*s", 3, "abcdef");
 	//ft_printf("%- 322.10d\n%s\n123", "asd");
-//	printf("%+010d", 12345);
-//	ft_printf("%10.4lld%s%hd", "ads");
-	printf("%+     d", 123);
+	//	printf("%+010d", 12345);
+	//ft_printf("%+10.4lld%s%hd", "ads");
+	ft_printf("%+-# 010.43lld", 123);
 }

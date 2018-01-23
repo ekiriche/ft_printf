@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 15:26:15 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/23 17:16:25 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,16 @@ typedef struct		s_format
 	int				field_width;
 	char			conversion;
 	char			*length_flag;
-	char			*other;
+	int				plus;
+	int				minus;
+	int				space;
+	int				zero;
+	int				hash;
 }					t_format;
 
+void	minus_present(t_format *chunk);
+void	plus_present(t_format *chunk);
+void	space_present(t_format *chunk);
 int		pepePls(char c);
 void	look_for_length_flag(t_format *chunk);
 void	look_for_field_width(t_format *chunk);
