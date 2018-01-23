@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
+/*   Updated: 2018/01/23 12:57:17 by ekiriche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -7,6 +19,20 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
+typedef struct		s_format
+{
+	int				len_format;
+	char			*format;
+	int				precision;
+	int				field_width;
+	char			conversion;
+	char			flag1;
+	char			*flag2;
+}					t_format;
+
+void	do_smth(t_format *chunk);
+char	look_for_conversion(t_format *chunk);
+int		size_of_chunk(const char *str);
 int		ft_printf(char const *fmt, ...);
 void		ultimate_handler(char c, va_list arg);
 #endif
