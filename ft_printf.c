@@ -34,6 +34,7 @@ int		ft_printf(const char *fmt, ...)
 			printf("Format: %s\n", chunk->format);
 			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
+//			handle_this(chunk, arg);
 			printf("\n");
 			while (chunk->len_format != 0)
 			{
@@ -209,7 +210,7 @@ void	look_for_field_width(t_format *chunk)
 	ptr = ft_strdup(chunk->format);
 	while (*ptr < '1' || *ptr > '9')
 	{
-		if (!(pepePls(*ptr)))
+		if (!(pepePls(*ptr)) || *ptr == '.')
 		{
 			chunk->field_width = -42;
 			return ;
@@ -273,13 +274,13 @@ int		main()
 	//	ft_printf("%x %X\n", 214748364, 214748364);
 	//	printf("%x %X\n", 214748364, 214748364);
 	//		printf("|%- 10.4d|\n", 42);
-	//	printf("|% 010.3hhd|\n", c);
+		ft_printf("% 010.3d\n", 123);
 	//	printf("% 10d10", 20);
 	//	printf("%.*s", 3, "abcdef");
 	//ft_printf("%- 322.10d\n%s\n123", "asd");
 	//	printf("%+010d", 12345);
 	//ft_printf("%+10.4lld%s%hd", "ads");
 //	ft_printf("%+-# 010.43lld", 123);
-	ft_printf("%.10d\n", 123);
+//	ft_printf("%.10d\n", 123);
 //	printf("%.10d\n", 123);
 }
