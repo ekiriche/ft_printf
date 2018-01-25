@@ -283,4 +283,5 @@ int		main()
 //	ft_printf("%+-# 010.43lld", 123);
 //	ft_printf("%.10d\n", 123);
 //	printf("%.10d\n", 123);
+	printf("%+- 010.5d", 44432);
 }
