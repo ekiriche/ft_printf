@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/26 13:40:24 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/26 19:27:28 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int		ft_printf(const char *fmt, ...)
 			fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
-//			printf("Format: %s\n", chunk->format);
-//			printf("Len: %i\n", chunk->len_format);
+			printf("Format: %s\n", chunk->format);
+			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
 			ultimate_handler(chunk, arg);
 			printf("\n");
@@ -216,7 +216,7 @@ void	look_for_field_width(t_format *chunk)
 	ptr = ft_strdup(chunk->format);
 	while (*ptr < '1' || *ptr > '9')
 	{
-		if (!(pepePls(*ptr)))
+		if (!(pepePls(*ptr)) || *ptr == '.')
 		{
 			chunk->field_width = 0;
 			return ;
@@ -268,6 +268,8 @@ int		size_of_chunk(const char *str)
 
 int		main()
 {
+	unsigned char lul;
+	lul = -99;
 	//	ft_printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
 	//	printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
 	//	printf("%D", 0xa);
@@ -289,6 +291,7 @@ int		main()
 //	ft_printf("%+-# 010.43lld", 123);
 	//ft_printf("%.10d\n", 123);
 //	printf("%.10d\n", 123);
-	printf("system: %+ .10d\n", 42);
-	ft_printf("mine  : %+ .10d\n", 42);
+			printf("system: %+10.7lld\n", 9223372036854775806);
+			ft_printf("mine  : %+10.7lld\n", 9223372036854775807);
+//	printf("%hhu", lul);
 }
