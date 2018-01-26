@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/23 18:49:18 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/26 13:40:24 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int		ft_printf(const char *fmt, ...)
 			fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
-			printf("Format: %s\n", chunk->format);
-			printf("Len: %i\n", chunk->len_format);
+//			printf("Format: %s\n", chunk->format);
+//			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
-//			handle_this(chunk, arg);
+			ultimate_handler(chunk, arg);
 			printf("\n");
 			while (chunk->len_format != 0)
 			{
@@ -78,7 +78,7 @@ void	minus_present(t_format *chunk)
 		}
 		i++;
 	}
-	chunk->minus = -42;
+	chunk->minus = 0;
 }
 
 void	plus_present(t_format *chunk)
@@ -95,7 +95,7 @@ void	plus_present(t_format *chunk)
 		}
 		i++;
 	}
-	chunk->plus = -42;
+	chunk->plus = 0;
 }
 
 void	space_present(t_format *chunk)
@@ -112,7 +112,7 @@ void	space_present(t_format *chunk)
 		}
 		i++;
 	}
-	chunk->space = -42;
+	chunk->space = 0;
 }
 
 void	hash_present(t_format *chunk)
@@ -129,7 +129,7 @@ void	hash_present(t_format *chunk)
 		}
 		i++;
 	}
-	chunk->hash = -42;
+	chunk->hash = 0;
 }
 
 void	zero_present(t_format *chunk)
@@ -139,19 +139,24 @@ void	zero_present(t_format *chunk)
 	i = 0;
 	while (pepePls(chunk->format[i]))
 	{
+		if (chunk->format[i] == '.')
+		{
+			chunk->zero = 0;
+			return ;
+		}
 		if (i == 0 && chunk->format[i] == '0')
 		{
 			chunk->zero = 1;
 			return ;
 		}
-		else if (chunk->format[i] == '0' && (chunk->format[i - 1] < '1' || chunk->format[i - 1] > '9'))
+		else if (chunk->format[i] == '0' && (chunk->format[i - 1] < '0' || chunk->format[i - 1] > '9'))
 		{
 			chunk->zero = 1;
 			return ;
 		}
 		i++;
 	}
-	chunk->zero = -42;
+	chunk->zero = 0;
 }
 
 void	do_smth(t_format *chunk)
@@ -174,6 +179,7 @@ void	do_smth(t_format *chunk)
 	printf("Precision: %i\n", chunk->precision);
 	printf("Field-width: %i\n", chunk->field_width);
 	printf("Length flag: %s\n", chunk->length_flag);
+	
 }
 
 void	look_for_length_flag(t_format *chunk)
@@ -210,9 +216,9 @@ void	look_for_field_width(t_format *chunk)
 	ptr = ft_strdup(chunk->format);
 	while (*ptr < '1' || *ptr > '9')
 	{
-		if (!(pepePls(*ptr)) || *ptr == '.')
+		if (!(pepePls(*ptr)))
 		{
-			chunk->field_width = -42;
+			chunk->field_width = 0;
 			return ;
 		}
 		ptr++;
@@ -239,7 +245,7 @@ void	look_for_precision(t_format *chunk)
 		ptr++;
 	if (!(pepePls(*ptr)))
 	{
-		chunk->precision = -42;
+		chunk->precision = 0;
 		return ;
 	}
 	ptr++;
@@ -274,14 +280,15 @@ int		main()
 	//	ft_printf("%x %X\n", 214748364, 214748364);
 	//	printf("%x %X\n", 214748364, 214748364);
 	//		printf("|%- 10.4d|\n", 42);
-		ft_printf("% 010.3d\n", 123);
+	//	printf("|% 010.3hhd|\n", c);
 	//	printf("% 10d10", 20);
 	//	printf("%.*s", 3, "abcdef");
 	//ft_printf("%- 322.10d\n%s\n123", "asd");
 	//	printf("%+010d", 12345);
 	//ft_printf("%+10.4lld%s%hd", "ads");
 //	ft_printf("%+-# 010.43lld", 123);
-//	ft_printf("%.10d\n", 123);
+	//ft_printf("%.10d\n", 123);
 //	printf("%.10d\n", 123);
-	printf("%+- 010.5d", 44432);
+	printf("system: %+ .10d\n", 42);
+	ft_printf("mine  : %+ .10d\n", 42);
 }
