@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/26 19:27:28 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/29 14:51:45 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 int		ft_printf(const char *fmt, ...)
 {
 	va_list arg;
-	int	c;
-	char	*s;
 	t_format	*chunk;
 
 	va_start(arg, fmt);
@@ -31,8 +29,8 @@ int		ft_printf(const char *fmt, ...)
 			fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
-			printf("Format: %s\n", chunk->format);
-			printf("Len: %i\n", chunk->len_format);
+//			printf("Format: %s\n", chunk->format);
+//			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
 			ultimate_handler(chunk, arg);
 			printf("\n");
@@ -170,7 +168,7 @@ void	do_smth(t_format *chunk)
 	minus_present(chunk);
 	hash_present(chunk);
 	zero_present(chunk);
-	printf("Minus: %i\n", chunk->minus);
+/*	printf("Minus: %i\n", chunk->minus);
 	printf("Space: %i\n", chunk->space);
 	printf("Plus: %i\n", chunk->plus);
 	printf("Zero: %i\n", chunk->zero);
@@ -179,7 +177,7 @@ void	do_smth(t_format *chunk)
 	printf("Precision: %i\n", chunk->precision);
 	printf("Field-width: %i\n", chunk->field_width);
 	printf("Length flag: %s\n", chunk->length_flag);
-	
+*/	
 }
 
 void	look_for_length_flag(t_format *chunk)
@@ -266,7 +264,7 @@ int		size_of_chunk(const char *str)
 	return (len);
 }
 
-int		main()
+/*int		main()
 {
 	unsigned char lul;
 	lul = -99;
@@ -291,7 +289,13 @@ int		main()
 //	ft_printf("%+-# 010.43lld", 123);
 	//ft_printf("%.10d\n", 123);
 //	printf("%.10d\n", 123);
-			printf("system: %+10.7lld\n", 9223372036854775806);
-			ft_printf("mine  : %+10.7lld\n", 9223372036854775807);
+//			printf("system: %+10.7lld\n", 9223372036854775806);
+//			ft_printf("mine  : %+10.7lld\n", 9223372036854775807);
 //	printf("%hhu", lul);
-}
+//	ft_printf("|%- +010.0d|\n", 0);
+//	printf("|%- +010.0d|\n", 0);
+	long long int y = -9223372036854775807;
+	size_t	x = 12345;
+	ft_printf("%zd\n", x);
+	printf("%zd\n", x);
+} */
