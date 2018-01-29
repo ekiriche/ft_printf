@@ -6,25 +6,31 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 14:51:31 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:39:21 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	deal_with_di(t_format *chunk, va_list arg)
+void	deal_with_di(t_format *chunk, va_list arg, int *count)
 {
-	//	signed char		c;
-	//	short int		si;
+	int				i;
 	long long int	li;
 
 	if (ft_strcmp(chunk->length_flag, "none") == 0)
-		step1_di_int(chunk, va_arg(arg, int));
-	//	else if (ft_strcmp(chunk->length_flag, "hh") == 0)
-	//	{
-	//		c = va_arg(arg, signed char);
-	//		step1_di_hh(chunk, c);
-	//	}
+	{
+		i = va_arg(arg, int);
+		li = (long long int)i;
+		if (chunk->field_width > chunk->precision)
+			*count += chunk->field_width;
+		else if (chunk->precision > ft_nbrlenlong(li))
+			*count += chunk->precision;
+		else
+			*count += ft_nbrlenlong(li);
+		if (chunk->plus == 1 && i >= 0 && chunk->field_width < ft_nbrlen(i))
+			*count += 1;
+		step1_di_int(chunk, i);
+	}
 	else if (ft_strcmp(chunk->length_flag, "h") == 0)
 		step1_di_si(chunk, va_arg(arg, int));
 	else if (ft_strcmp(chunk->length_flag, "ll") == 0 ||
@@ -33,9 +39,17 @@ void	deal_with_di(t_format *chunk, va_list arg)
 			ft_strcmp(chunk->length_flag, "j") == 0 ||
 			ft_strcmp(chunk->length_flag, "t") == 0)
 	{
-		li = va_arg(arg, long long int);
+		li = va_arg(arg, long long int);;
+		if (chunk->field_width > chunk->precision)
+			*count += chunk->field_width;
+		else if (chunk->precision > ft_nbrlenlong(li))
+			*count += chunk->precision;
+		else
+			*count += ft_nbrlenlong(li);
+		if (chunk->plus == 1 && li >= 0 && chunk->field_width < ft_nbrlenlong(li))
+			*count += 1;
 		step1_di_li(chunk, li);
-	} 
+	}
 }
 
 void	step1_di_si(t_format *chunk, short int num)
@@ -56,7 +70,7 @@ void	step1_di_si(t_format *chunk, short int num)
 		chunk->precision = ft_nbrlen(num);
 	while (chunk->field_width-- > chunk->precision)
 		ft_putchar(' ');
-	if (chunk->plus == 1)
+	if (chunk->plus == 1 && num >= 0)
 		ft_putchar('+');
 	if (chunk->space == 1)
 		ft_putchar(' ');
@@ -69,7 +83,7 @@ void	di_int_minus_si(t_format *chunk, short int num)
 {
 	if (chunk->plus == 1 || chunk->space == 1)
 	{
-		if (chunk->plus == 1)
+		if (chunk->plus == 1 && num >= 0)
 			ft_putchar('+');
 		if (chunk->space == 1)
 			ft_putchar(' ');
@@ -108,7 +122,7 @@ void	step1_di_li(t_format *chunk, long long int num)
 		chunk->precision = ft_nbrlenlong(num);
 	while (chunk->field_width-- > chunk->precision)
 		ft_putchar(' ');
-	if (chunk->plus == 1)
+	if (chunk->plus == 1 && num >= 0)
 		ft_putchar('+');
 	if (chunk->space == 1)
 		ft_putchar(' ');
@@ -121,7 +135,7 @@ void	di_longint_minus(t_format *chunk, long long int num)
 {
 	if (chunk->plus == 1 || chunk->space == 1)
 	{
-		if (chunk->plus == 1)
+		if (chunk->plus == 1 && num >= 0)
 			ft_putchar('+');
 		if (chunk->space == 1)
 			ft_putchar(' ');
@@ -160,7 +174,7 @@ void	step1_di_int(t_format *chunk, int num)
 		chunk->precision = ft_nbrlen(num);
 	while (chunk->field_width-- > chunk->precision)
 		ft_putchar(' ');
-	if (chunk->plus == 1)
+	if (chunk->plus == 1 && num >= 0)
 		ft_putchar('+');
 	if (chunk->space == 1)
 		ft_putchar(' ');
@@ -173,7 +187,7 @@ void	di_int_minus(t_format *chunk, int num)
 {
 	if (chunk->plus == 1 || chunk->space == 1)
 	{
-		if (chunk->plus == 1)
+		if (chunk->plus == 1 && num >= 0)
 			ft_putchar('+');
 		if (chunk->space == 1)
 			ft_putchar(' ');

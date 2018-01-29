@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 14:56:14 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/29 15:57:12 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
-
 void	step1_di_si(t_format *chunk, short int num);
 void	di_int_minus_si(t_format *chunk, short int num);
 void	step1_di_longint(t_format *chunk, long long int num);
@@ -43,9 +42,9 @@ int		ft_nbrlenlong(long long int num);
 void	ft_putnbrlong(long long int num);
 void	step1_di_li(t_format *chunk, long long int num);
 void	di_int_minus(t_format *chunk, int num);
-void	ultimate_handler(t_format *chunk, va_list arg);
+void	ultimate_handler(t_format *chunk, va_list arg, int *count);
 void	error_handler(t_format *chunk);
-void	deal_with_di(t_format *chunk, va_list arg);
+void	deal_with_di(t_format *chunk, va_list arg, int *count);
 void	step1_di_int(t_format *chunk, int num);
 void	print_smth(t_format *chunk, va_list arg);
 void	minus_present(t_format *chunk);

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 14:51:45 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/29 17:18:14 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int		ft_printf(const char *fmt, ...)
 {
 	va_list arg;
+	int count = 0;
 	t_format	*chunk;
 
 	va_start(arg, fmt);
@@ -32,8 +33,8 @@ int		ft_printf(const char *fmt, ...)
 //			printf("Format: %s\n", chunk->format);
 //			printf("Len: %i\n", chunk->len_format);
 			do_smth(chunk);
-			ultimate_handler(chunk, arg);
-			printf("\n");
+			ultimate_handler(chunk, arg, &count);
+//			printf("\n");
 			while (chunk->len_format != 0)
 			{
 				fmt++;
@@ -47,10 +48,11 @@ int		ft_printf(const char *fmt, ...)
 			{
 				write(1, &(*fmt), 1);
 				fmt++;
+				count++;
 			}
 	}
 	va_end(arg);
-	return (1);
+	return (count);
 }
 
 int		pepePls(char c)
