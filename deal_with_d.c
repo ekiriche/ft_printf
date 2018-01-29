@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 17:39:21 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/29 18:04:15 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	deal_with_di(t_format *chunk, va_list arg, int *count)
 {
 	int				i;
 	long long int	li;
+	short int		si;
+	signed char		ci;
 
 	if (ft_strcmp(chunk->length_flag, "none") == 0)
 	{
@@ -31,8 +33,6 @@ void	deal_with_di(t_format *chunk, va_list arg, int *count)
 			*count += 1;
 		step1_di_int(chunk, i);
 	}
-	else if (ft_strcmp(chunk->length_flag, "h") == 0)
-		step1_di_si(chunk, va_arg(arg, int));
 	else if (ft_strcmp(chunk->length_flag, "ll") == 0 ||
 			ft_strcmp(chunk->length_flag, "l") == 0 ||
 			ft_strcmp(chunk->length_flag, "z") == 0 ||
@@ -49,6 +49,34 @@ void	deal_with_di(t_format *chunk, va_list arg, int *count)
 		if (chunk->plus == 1 && li >= 0 && chunk->field_width < ft_nbrlenlong(li))
 			*count += 1;
 		step1_di_li(chunk, li);
+	}
+	else if (ft_strcmp(chunk->length_flag, "h") == 0)
+	{
+		si = va_arg(arg, int);
+		li = (long long int)si;
+		if (chunk->field_width > chunk->precision)
+			*count += chunk->field_width;
+		else if (chunk->field_width < chunk->precision)
+			*count += chunk->precision;
+		else
+			*count += ft_nbrlenlong(li);
+		if (chunk->plus == 1 && si >= 0)
+			*count += 1;
+		step1_di_int(chunk, si);
+	}
+	else if (ft_strcmp(chunk->length_flag, "hh") == 0)
+	{
+		ci = va_arg(arg, int);
+		li = (long long int)ci;
+		if (chunk->field_width > chunk->precision)
+			*count += chunk->field_width;
+		else if (chunk->field_width < chunk->precision)
+			*count += chunk->precision;
+		else
+			*count += ft_nbrlenlong(li);
+		if (chunk->plus == 1 && ci >= 0)
+			*count += 1;
+		step1_di_int(chunk, ci);
 	}
 }
 
