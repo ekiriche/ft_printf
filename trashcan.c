@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 15:55:56 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 16:57:17 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int		ft_nbrlenlong(long long int num)
 
 void	ft_putnbrlong(long long int n)
 {
-//	if (n == -9223372036854775808)
-//	{
-//		ft_putstr("-9");
-//		n = 223372036854775808;
-//	}
+	if ((unsigned long long int)n == -9223372036854775808U)
+	{
+		ft_putstr("-9");
+		n = 223372036854775808;
+	}
 	if (n < 0)
 	{
 		ft_putchar('-');
@@ -45,4 +45,29 @@ void	ft_putnbrlong(long long int n)
 	if (n > 9)
 		ft_putnbrlong(n / 10);
 	ft_putchar(n % 10 + '0');
+}
+
+int		ft_find_point0(t_format *chunk)
+{
+	int	i;
+
+	i = 0;
+	while (chunk->format[i + 1] != '\0')
+	{
+		if (chunk->format[i] == '.' && (chunk->format[i + 1] == '0' ||
+		chunk->format[i + 1] == chunk->conversion))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	case_point0(t_format *chunk)
+{
+	if (chunk->plus == 1 || chunk->space == 1)
+		chunk->field_width--;
+	while (chunk->field_width-- > chunk->precision)
+		ft_putchar(' ');
+	if (chunk->space == 1)
+		ft_putchar(' ');
 }
