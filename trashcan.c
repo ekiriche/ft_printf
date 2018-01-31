@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 17:12:17 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:55:56 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ int		ft_nbrlenlong(long long int num)
 
 void	ft_putnbrlong(long long int n)
 {
+//	if (n == -9223372036854775808)
+//	{
+//		ft_putstr("-9");
+//		n = 223372036854775808;
+//	}
 	if (n < 0)
 	{
 		ft_putchar('-');

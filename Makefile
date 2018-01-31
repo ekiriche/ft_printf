@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/01/29 18:07:12 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/01/31 15:06:44 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRC = deal_with_d.c \
 		ft_printf.c \
 		handler.c \
 		trashcan.c \
+		costili.c \
 
 OBJ_PATH = ./libft/
 INCLUDE = -I ./ft_printf.h -I ./libft/libft.h

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 17:50:52 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:59:05 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		main(void)
 {
-	short int lul = 32768;
-	printf("their: %hd\n", lul);
-	ft_printf("smine: %hd\n", lul);
+	short int lul = -42;
+	printf("%lld", -9223372036854775809);
 }

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 18:25:39 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:52:15 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	deal_with_di(t_format *chunk, va_list arg, int *count)
 	{
 		i = va_arg(arg, int);
 		counting(chunk, (long long int)i, count);
+		if (i < 0 && chunk->precision > chunk->field_width)
+			*count += 1;
 		step1_di_int(chunk, i);
 	}
 	else if (ft_strcmp(chunk->length_flag, "ll") == 0 ||
@@ -59,6 +61,13 @@ void	counting(t_format *chunk, long long int li, int *count)
 		*count += ft_nbrlenlong(li);
 	if (chunk->plus == 1 && li >= 0 && chunk->field_width < ft_nbrlenlong(li))
 		*count += 1;
+	if (chunk->space == 1 && chunk->field_width == 0)
+		*count += 1;
+	if (chunk->space == 1 && li < 0 && chunk->field_width == 0)
+	{
+		chunk->space = 0;
+		*count -= 1;
+	}
 }
 
 void	step1_di_li(t_format *chunk, long long int num)
@@ -115,6 +124,11 @@ void	di_longint_minus(t_format *chunk, long long int num)
 
 void	step1_di_int(t_format *chunk, int num)
 {
+	if (num < 0 && (chunk->zero == 1 || chunk->precision > chunk->field_width))
+	{
+		negative_number_and_zero(chunk, num);
+		return ;
+	}
 	if (chunk->minus == 1 && chunk->field_width != 0)
 	{
 		di_int_minus(chunk, num);
