@@ -6,55 +6,11 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 16:56:19 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 20:31:45 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	deal_with_di(t_format *chunk, va_list arg, int *count)
-{
-	int				i;
-	long long int	li;
-	short int		si;
-	signed char		ci;
-
-	if (ft_strcmp(chunk->length_flag, "none") == 0)
-	{
-		i = va_arg(arg, int);
-		counting(chunk, (long long int)i, count);
-		if (ft_find_point0(chunk) && i == 0)
-		{
-			case_point0(chunk);
-			return ;
-		}
-		if (i < 0 && chunk->precision > chunk->field_width)
-			*count += 1;
-		step1_di_int(chunk, i);
-	}
-	else if (ft_strcmp(chunk->length_flag, "ll") == 0 ||
-			ft_strcmp(chunk->length_flag, "l") == 0 ||
-			ft_strcmp(chunk->length_flag, "z") == 0 ||
-			ft_strcmp(chunk->length_flag, "j") == 0 ||
-			ft_strcmp(chunk->length_flag, "t") == 0)
-	{
-		li = va_arg(arg, long long int);
-		counting(chunk, li, count);
-		step1_di_li(chunk, li);
-	}
-	else if (ft_strcmp(chunk->length_flag, "h") == 0)
-	{
-		si = va_arg(arg, int);
-		counting(chunk, (long long int)si, count);
-		step1_di_int(chunk, si);
-	}
-	else if (ft_strcmp(chunk->length_flag, "hh") == 0)
-	{
-		ci = va_arg(arg, int);
-		counting(chunk, (long long int)ci, count);
-		step1_di_int(chunk, ci);
-	}
-}
 
 void	counting(t_format *chunk, long long int li, int *count)
 {

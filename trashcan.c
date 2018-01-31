@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 16:57:17 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 20:51:38 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_find_point0(t_format *chunk)
 	while (chunk->format[i + 1] != '\0')
 	{
 		if (chunk->format[i] == '.' && (chunk->format[i + 1] == '0' ||
-		chunk->format[i + 1] == chunk->conversion))
+					chunk->format[i + 1] == chunk->conversion))
 			return (1);
 		i++;
 	}
@@ -70,4 +70,22 @@ void	case_point0(t_format *chunk)
 		ft_putchar(' ');
 	if (chunk->space == 1)
 		ft_putchar(' ');
+}
+
+long long int	ft_dectooctlong(long long int num)
+{
+	long long int	ans;
+	long long int	temp;
+	long long int	i;
+
+	i = 1;
+	ans = 0;
+	while (num != 0)
+	{
+		temp = num % 8;
+		num /= 8;
+		ans += temp * i;
+		i *= 10;
+	}
+	return (ans);
 }

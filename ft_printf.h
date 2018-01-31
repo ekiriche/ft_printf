@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 16:46:06 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/01/31 20:51:48 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,17 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
+long long int	ft_dectooctlong(long long int num);
+void	deal_with_o(t_format *chunk, va_list arg, int *count);
+void	deal_with_o1(t_format *chunk, va_list arg, int *count);
+void	deal_with_o2(t_format *chunk, va_list arg, int *count);
+void	deal_with_o3(t_format *chunk, va_list arg, int *count);
+void	deal_with_o4(t_format *chunk, va_list arg, int *count);
+void	deal_with_di(t_format *chunk, va_list arg, int *count);
+void	deal_with_di1(t_format *chunk, va_list arg, int *count);
+void	deal_with_di2(t_format *chunk, va_list arg, int *count);
+void	deal_with_di3(t_format *chunk, va_list arg, int *count);
+void	deal_with_di4(t_format *chunk, va_list arg, int *count);
 void	case_point0(t_format *chunk);
 int		ft_find_point0(t_format *chunk);
 void	negative_number_and_zero(t_format *chunk, long long int num);
@@ -46,7 +57,6 @@ void	step1_di_li(t_format *chunk, long long int num);
 void	di_int_minus(t_format *chunk, int num);
 void	ultimate_handler(t_format *chunk, va_list arg, int *count);
 void	error_handler(t_format *chunk);
-void	deal_with_di(t_format *chunk, va_list arg, int *count);
 void	step1_di_int(t_format *chunk, int num);
 void	print_smth(t_format *chunk, va_list arg);
 void	minus_present(t_format *chunk);

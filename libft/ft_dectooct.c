@@ -1,10 +1,10 @@
 #include "libft.h"
 
-int	ft_dectooct(int num)
+int	ft_dectooct(long long int num)
 {
-	int	ans;
-	int	temp;
-	int	i;
+	long long int	ans;
+	long long int	temp;
+	long long int	i;
 
 	i = 1;
 	ans = 0;
