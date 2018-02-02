@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/02 15:44:25 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:42:37 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
+void	step1_string(t_format *chunk, char *str);
+void	string_minus(t_format *chunk, char *str);
+void	counting_string(t_format *chunk, char *str, int *count);
+void	deal_with_s(t_format *chunk, va_list arg, int *count);
+void	deal_with_s1(t_format *chunk, va_list arg, int *count);
+void	counting_char(t_format *chunk,int *count);
+void	step1_char(t_format *chunk, char c);
+void	char_minus(t_format *chunk, char c);
 void	deal_with_c(t_format *chunk, va_list arg, int *count);
 void	deal_with_c1(t_format *chunk, va_list arg, int *count);
 void	deal_with_c2(t_format *chunk, va_list arg, int *count);

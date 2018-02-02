@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 15:32:01 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 18:44:22 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		pepePls(char c)
 {
 	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i'
 			|| c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
-			|| c == 'X' || c == 'c' || c == 'C')
+			|| c == 'X' || c == 'c' || c == 'C' || c == '%')
 		return (0);
 	return (1);
 }
@@ -187,6 +187,8 @@ void	look_for_length_flag(t_format *chunk)
 	int	i;
 
 	i = chunk->len_format - 3;
+//	if (ft_strcmp(chunk->length_flag, "") != 0)
+//		return ;
 	if (i >= 0)
 	{
 		if ((chunk->format[i] == 'h' && chunk->format[i + 1] == 'h')
@@ -233,7 +235,17 @@ void	look_for_conversion(t_format *chunk)
 	i = 0;
 	while (pepePls(chunk->format[i]))
 		i++;
-	chunk->conversion = chunk->format[i];
+	if (chunk->format[i] == 'S' || chunk->format[i] == 'C' ||
+		chunk->format[i] == 'D' || chunk->format[i] == 'O' ||
+		chunk->format[i] == 'U')
+	{
+		chunk->conversion = ft_tolower(chunk->format[i]);
+		chunk->length_flag = ft_strdup("l");
+	}
+	else if (chunk->format[i] == '%')
+		chunk->conversion = '%';
+	else
+		chunk->conversion = chunk->format[i];
 }
 
 void	look_for_precision(t_format *chunk)
