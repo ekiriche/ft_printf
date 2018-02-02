@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 20:51:48 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:44:25 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
-long long int	ft_dectooctlong(long long int num);
+void	deal_with_c(t_format *chunk, va_list arg, int *count);
+void	deal_with_c1(t_format *chunk, va_list arg, int *count);
+void	deal_with_c2(t_format *chunk, va_list arg, int *count);
+unsigned long long int	ft_dectooctlong(unsigned long long int num);
 void	deal_with_o(t_format *chunk, va_list arg, int *count);
 void	deal_with_o1(t_format *chunk, va_list arg, int *count);
 void	deal_with_o2(t_format *chunk, va_list arg, int *count);

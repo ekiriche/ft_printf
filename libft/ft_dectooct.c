@@ -1,18 +1,16 @@
 #include "libft.h"
 
-int	ft_dectooct(long long int num)
+unsigned int	ft_dectooct(unsigned int num)
 {
-	long long int	ans;
-	long long int	temp;
-	long long int	i;
+	unsigned int	ans;
+	unsigned int	i;
 
 	i = 1;
 	ans = 0;
 	while (num != 0)
 	{
-		temp = num % 8;
+		ans += (num % 8) * i;
 		num /= 8;
-		ans += temp * i;
 		i *= 10;
 	}
 	return (ans);

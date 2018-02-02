@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 20:51:38 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:13:47 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,14 @@ void	case_point0(t_format *chunk)
 		ft_putchar(' ');
 	if (chunk->space == 1)
 		ft_putchar(' ');
+
 }
 
-long long int	ft_dectooctlong(long long int num)
+unsigned long long int	ft_dectooctlong(unsigned long long int num)
 {
-	long long int	ans;
-	long long int	temp;
-	long long int	i;
+	unsigned long long int	ans;
+	unsigned long long int	temp;
+	unsigned long long int	i;
 
 	i = 1;
 	ans = 0;

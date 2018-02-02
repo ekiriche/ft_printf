@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 20:33:41 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 20:51:24 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:45:00 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,24 @@ void	deal_with_o(t_format *chunk, va_list arg, int *count)
 
 void	deal_with_o1(t_format *chunk, va_list arg, int *count)
 {
-	int	i;
+	unsigned int	i;
 
-	i = va_arg(arg, int);
-	i = ft_dectooct((long long int)i);
+	i = va_arg(arg, unsigned int);
+	i = ft_dectooct(i);
 	counting(chunk, (long long int)i, count);
-	if (ft_find_point0(chunk) && i == 0)
+	if (ft_find_point0(chunk) && i == 0 && chunk->hash == 0)
 	{
 		case_point0(chunk);
 		return ;
 	}
-	if (i < 0 && chunk->precision > chunk->field_width)
-		*count += 1;
 	step1_di_int(chunk, i);
 }
 
 void	deal_with_o2(t_format *chunk, va_list arg, int *count)
 {
-	long long int	li;
+	unsigned long long int	li;
 
-	li = va_arg(arg, long long int);
+	li = va_arg(arg, unsigned long long int);
 	li = ft_dectooctlong(li);
 	counting(chunk, li, count);
 	if (ft_find_point0(chunk) && li == 0)
@@ -57,41 +55,35 @@ void	deal_with_o2(t_format *chunk, va_list arg, int *count)
 		case_point0(chunk);
 		return ;
 	}
-	if (li < 0 && chunk->precision > chunk->field_width)
-		*count += 1;
 	step1_di_li(chunk, li);
 }
 
 void	deal_with_o3(t_format *chunk, va_list arg, int *count)
 {
-	short int	i;
+	unsigned short int	i;
 
-	i = va_arg(arg, int);
-	i = ft_dectooct((long long int)i);
+	i = va_arg(arg, unsigned int);
+	i = ft_dectooct(i);
 	counting(chunk, (long long int)i, count);
 	if (ft_find_point0(chunk) && i == 0)
 	{
 		case_point0(chunk);
 		return ;
 	}
-	if (i < 0 && chunk->precision > chunk->field_width)
-		*count += 1;
 	step1_di_int(chunk, i);
 }
 
 void	deal_with_o4(t_format *chunk, va_list arg, int *count)
 {
-	signed char	i;
+	unsigned char	i;
 
-	i = va_arg(arg, int);
-	i = ft_dectooct((long long int)i);
+	i = va_arg(arg, unsigned int);
+	i = ft_dectooct(i);
 	counting(chunk, (long long int)i, count);
 	if (ft_find_point0(chunk) && i == 0)
 	{
 		case_point0(chunk);
 		return ;
 	}
-	if (i < 0 && chunk->precision > chunk->field_width)
-		*count += 1;
 	step1_di_int(chunk, i);
 }

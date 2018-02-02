@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 19:00:34 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 19:19:42 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 13:24:35 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	deal_with_di1(t_format *chunk, va_list arg, int *count)
 
 	i = va_arg(arg, int);
 	counting(chunk, (long long int)i, count);
-	if (ft_find_point0(chunk) && i == 0)
+	if (ft_find_point0(chunk) && i == 0 && chunk->hash == 0)
 	{
 		case_point0(chunk);
 		return ;

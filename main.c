@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/31 21:01:15 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 15:48:55 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 int		main(void)
 {
-	short int lul = -42;
-	long long int g = 99999999999;
-	printf("%-05o\n", 40);
-	ft_printf("%-05o\n", 40);
+	short int lul = 1;
+	long long int g = -2500000000;
+//	printf("them: %o%o%o%o%o\n", 1, 42, 9999, 123456, 999988888);
+//	ft_printf("mine: %o%o%o%o%o\n", 1, 42, 9999, 123456, 999988888);
+//	printf("them: %o", 999998888);
+//	ft_printf("mine: %o", 999998888);
+	printf("them: %c\n", 'c');
+	ft_printf("mine: %c\n", 'c');
+
 }

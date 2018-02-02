@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/01/31 20:46:16 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/02 15:45:49 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,6 +97,7 @@ SRC = deal_with_d.c \
 		costili.c \
 		deal_with_di_start.c \
 		deal_with_oct_start.c \
+		deal_with_c_start.c \
 
 OBJ_PATH = ./libft/
 INCLUDE = -I ./ft_printf.h -I ./libft/libft.h
@@ -117,6 +118,6 @@ clean:
 	@rm -f $(OBJ) $(OBJ_LIB)
 
 fclean: clean
-	@rm $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
