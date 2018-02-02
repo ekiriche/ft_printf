@@ -6,7 +6,7 @@
 /*   By: dpolosuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 15:23:51 by dpolosuk          #+#    #+#             */
-/*   Updated: 2018/02/02 17:52:40 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/02 19:52:05 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct		s_list
 
 void				ft_strnclr(char *str, int n);
 int					ft_nbrlen(int n);
-void				ft_dectohex(int nbr);
-void				ft_dectohexsmall(int n);
+char				*ft_dectohex(size_t nbr);
+char				*ft_dectohexsmall(size_t n);
 unsigned int		ft_dectooct(unsigned int num);
 void				ft_putunbr(unsigned int n);
 size_t				ft_strlen(const char *str);
