@@ -6,7 +6,7 @@
 /*   By: dpolosuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 15:23:51 by dpolosuk          #+#    #+#             */
-/*   Updated: 2018/02/03 12:49:05 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:40:25 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+void				ft_strrev(char *str);
+int					ft_count_bits(unsigned long long int n);
 void				ft_strnclr(char *str, int n);
 int					ft_nbrlen(int n);
 char				*ft_dectohex(unsigned long long int nbr);
 char				*ft_dectohexsmall(unsigned long long int n);
-unsigned int		ft_dectooct(unsigned int num);
+char				*ft_dectooct(unsigned long long int num);
 void				ft_putunbr(unsigned int n);
 size_t				ft_strlen(const char *str);
 char				*ft_strcpy(char *dst, const char *src);
@@ -74,7 +76,8 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const*s2);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-char				*ft_itoa(int n);
+char				*ft_itoa(long long int n);
+char				*ft_itoa_unsign(unsigned long long int n);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);

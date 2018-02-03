@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 14:12:09 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:19:56 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,12 @@ void	deal_with_xX1(t_format *chunk, va_list arg, int *count)
 	i = va_arg(arg, unsigned int);
 	if (chunk->conversion == 'x')
 		ans = ft_strdup(ft_dectohexsmall((unsigned long long int)i));
-	else
+	else if (chunk->conversion == 'X')
 		ans = ft_strdup(ft_dectohex((unsigned long long int)i));
+	else if (chunk->conversion == 'u')
+		ans = ft_itoa_unsign((unsigned long long int)i);
+	else
+		ans = ft_dectooct((unsigned long long int)i);
 	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans);
 }
@@ -50,8 +54,12 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 	i = va_arg(arg, unsigned long long int);
 	if (chunk->conversion == 'x')
 		ans = ft_strdup(ft_dectohexsmall(i));
-	else
+	else if (chunk->conversion == 'X')
 		ans = ft_strdup(ft_dectohex(i));
+	else if (chunk->conversion == 'u')
+		ans = ft_itoa_unsign(i);
+	else
+		ans = ft_dectooct(i);
 	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans);
 }
@@ -64,8 +72,12 @@ void	deal_with_xX3(t_format *chunk, va_list arg, int *count)
 	i = va_arg(arg, unsigned int);
 	if (chunk->conversion == 'x')
 		ans = ft_strdup(ft_dectohexsmall((unsigned long long int)i));
-	else
+	else if (chunk->conversion == 'X')
 		ans = ft_strdup(ft_dectohex((unsigned long long int)i));
+	else if (chunk->conversion == 'u')
+		ans = ft_itoa_unsign((unsigned long long int)i);
+	else
+		ans = ft_dectooct((unsigned long long int)i);
 	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans);
 }
@@ -78,8 +90,12 @@ void	deal_with_xX4(t_format *chunk, va_list arg, int *count)
 	i = va_arg(arg, unsigned int);
 	if (chunk->conversion == 'x')
 		ans = ft_strdup(ft_dectohexsmall((unsigned long long int)i));
-	else
+	else if (chunk->conversion == 'X')
 		ans = ft_strdup(ft_dectohex((unsigned long long int)i));
+	else if (chunk->conversion == 'u')
+		ans = ft_itoa_unsign((unsigned long long int)i);
+	else
+		ans = ft_dectooct((unsigned long long int)i);
 	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans);
 }
@@ -94,8 +110,12 @@ void	counting_xX(t_format *chunk, char *str, int *count)
 	else if (!(ft_find_point0(chunk) && ft_strcmp(str, "0") == 0))
 		*count += (int)ft_strlen(str);
 	if (chunk->hash == 1 && chunk->precision == 0 && chunk->field_width == 0 &&
-			ft_strcmp(str, "0") != 0)
+			ft_strcmp(str, "0") != 0 && (chunk->conversion == 'x' ||
+				chunk->conversion == 'X'))
 		*count += 2;
+	if (chunk->hash == 1 && chunk->precision == 0 && chunk->field_width == 0 &&
+			ft_strcmp(str, "0") != 0 && chunk->conversion == 'o')
+		*count += 1;
 }
 
 void	step1_xX_int(t_format *chunk, char *str)
@@ -110,8 +130,12 @@ void	step1_xX_int(t_format *chunk, char *str)
 		xX_int_minus(chunk, str);
 		return ;
 	}
-	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0)
+	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
+	(chunk->conversion == 'x' || chunk->conversion == 'X'))
 		chunk->field_width -= 2;
+	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
+	chunk->conversion == 'o')
+		chunk->field_width--;
 	if (chunk->zero == 1 && chunk->precision == 0 &&
 			(size_t)chunk->field_width > ft_strlen(str))
 	{
@@ -128,6 +152,9 @@ void	step1_xX_int(t_format *chunk, char *str)
 	else if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'X')
 		ft_putstr("0X");
+	else if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
+			chunk->conversion == 'o')
+		ft_putchar('0');
 	while((size_t)chunk->precision-- > ft_strlen(str))
 		ft_putchar('0');
 	ft_putstr(str);
@@ -135,8 +162,12 @@ void	step1_xX_int(t_format *chunk, char *str)
 
 void	xX_int_minus(t_format *chunk, char *str)
 {
-	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0)
+	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
+	(chunk->conversion == 'x' || chunk->conversion == 'X'))
 		chunk->field_width -= 2;
+	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
+			chunk->conversion == 'o')
+		chunk->field_width--;
 	while ((size_t)chunk->precision > ft_strlen(str))
 	{
 		ft_putchar('0');
@@ -149,8 +180,11 @@ void	xX_int_minus(t_format *chunk, char *str)
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'X')
 		ft_putstr("0X");
+	if (chunk->hash == 1 &&ft_strcmp(str, "0") != 0 &&
+			chunk->conversion == 'o')
+		ft_putchar('0');
 	ft_putstr(str);
-	while((size_t)chunk->field_width > ft_strlen(str))
+	while(chunk->field_width > (int)ft_strlen(str))
 	{
 		ft_putchar(' ');
 		chunk->field_width--;

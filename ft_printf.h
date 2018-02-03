@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 14:01:49 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:21:14 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,6 @@ void	char_minus(t_format *chunk, char c);
 void	deal_with_c(t_format *chunk, va_list arg, int *count);
 void	deal_with_c1(t_format *chunk, va_list arg, int *count);
 void	deal_with_c2(t_format *chunk, va_list arg, int *count);
-unsigned long long int	ft_dectooctlong(unsigned long long int num);
-void	deal_with_o(t_format *chunk, va_list arg, int *count);
-void	deal_with_o1(t_format *chunk, va_list arg, int *count);
-void	deal_with_o2(t_format *chunk, va_list arg, int *count);
-void	deal_with_o3(t_format *chunk, va_list arg, int *count);
-void	deal_with_o4(t_format *chunk, va_list arg, int *count);
 void	deal_with_di(t_format *chunk, va_list arg, int *count);
 void	deal_with_di1(t_format *chunk, va_list arg, int *count);
 void	deal_with_di2(t_format *chunk, va_list arg, int *count);

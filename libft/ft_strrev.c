@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dectooct.c                                      :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/03 15:11:24 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 15:41:49 by ekiriche         ###   ########.fr       */
+/*   Created: 2018/02/03 15:37:42 by ekiriche          #+#    #+#             */
+/*   Updated: 2018/02/03 15:40:08 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_dectooct(unsigned long long dec)
+void	ft_strrev(char *str)
 {
-	char	*res;
-	int		bits_num;
-	int		res_len;
-	int		i;
+	size_t	i;
+	size_t	temp;
 
 	i = 0;
-	bits_num = ft_count_bits(dec);
-	res_len = (bits_num % 3 == 0) ? (bits_num / 3) : ((bits_num / 3) + 1);
-	res = ft_strnew(res_len);
-	while (i < res_len)
+	while (i < ft_strlen(str) / 2)
 	{
-		res[i] = (dec & 7) + '0';
-		dec = dec >> 3;
+		temp = str[i];
+		str[i] = str[ft_strlen(str) - i - 1];
+		str[ft_strlen(str) - i - 1] = temp;
 		i++;
 	}
-	ft_strrev(res);
-	return (res);
 }

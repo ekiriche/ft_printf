@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/02 18:33:53 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 16:33:54 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	deal_with_s1(t_format *chunk, va_list arg, int *count)
 {
 	char	*str;
 
-	str = ft_strdup(va_arg(arg, char*));
+	if (va_arg(arg, char*) == NULL)
+		str = ft_strdup("(null)");
+	else
+		str = ft_strdup(va_arg(arg, char*));
 	counting_string(chunk, str, count);
 	step1_string(chunk, str);
 }

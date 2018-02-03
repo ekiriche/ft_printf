@@ -6,13 +6,13 @@
 /*   By: dpolosuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 13:09:51 by dpolosuk          #+#    #+#             */
-/*   Updated: 2017/11/13 09:52:59 by dpolosuk         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:08:17 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_dgtsinnum(int n)
+static long long int		ft_dgtsinnum(long long int n)
 {
 	int		i;
 
@@ -22,10 +22,10 @@ static int		ft_dgtsinnum(int n)
 	return (i);
 }
 
-static char		*ft_less(int n, char *res)
+static char					*ft_less(long long int n, char *res)
 {
-	int		i;
-	int		len;
+	long long int		i;
+	long long int		len;
 
 	len = ft_dgtsinnum(n);
 	n *= -1;
@@ -40,10 +40,10 @@ static char		*ft_less(int n, char *res)
 	return (res);
 }
 
-static char		*ft_else(int n, char *res)
+static char		*ft_else(long long int n, char *res)
 {
-	int		i;
-	int		len;
+	long long int		i;
+	long long int		len;
 
 	len = ft_dgtsinnum(n);
 	i = len;
@@ -73,10 +73,10 @@ static char		*ft_kostyl(char *res)
 	return (res);
 }
 
-char			*ft_itoa(int n)
+char			*ft_itoa(long long int n)
 {
-	int		len;
-	char	*res;
+	long long int		len;
+	char				*res;
 
 	len = ft_dgtsinnum(n);
 	if (n >= 0)

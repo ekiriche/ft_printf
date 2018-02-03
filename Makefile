@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/02/03 12:45:12 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/03 15:40:50 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,9 @@ SRC_LIB = ft_42.c \
 		ft_toupper.c \
 		putunbr.c \
 		ft_strnclr.c \
+		ft_itoa_unsign.c \
+		ft_count_bits.c \
+		ft_strrev.c \
 
 SRC = deal_with_d.c \
 		errors.c \
@@ -97,7 +100,6 @@ SRC = deal_with_d.c \
 		trashcan.c \
 		costili.c \
 		deal_with_di_start.c \
-		deal_with_oct_start.c \
 		deal_with_c_start.c \
 		deal_with_s_start.c \
 		deal_with_xX_start.c \
