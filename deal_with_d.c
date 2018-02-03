@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/02 13:47:29 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 13:57:16 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	counting(t_format *chunk, long long int li, int *count)
 {
-	if (chunk->field_width > chunk->precision)
+	if (chunk->field_width > chunk->precision &&
+			chunk->field_width > ft_nbrlenlong(li))
 		*count += chunk->field_width;
 	else if (chunk->precision > ft_nbrlenlong(li))
 		*count += chunk->precision;
-	else if (chunk->hash == 1 && chunk->conversion == 'o')
-		*count += 1;
 	else if (!(ft_find_point0(chunk) && li == 0))
 		*count += ft_nbrlenlong(li);
+	if (chunk->hash == 1 && chunk->conversion == 'o' && li != 0 &&
+			chunk->precision == 0 && chunk->field_width == 0)
+		*count += 1;
 	if (chunk->plus == 1 && li >= 0 && chunk->field_width < ft_nbrlenlong(li))
 		*count += 1;
 	if (chunk->space == 1 && chunk->field_width == 0)

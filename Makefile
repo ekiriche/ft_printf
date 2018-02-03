@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/02/02 17:54:14 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/03 12:45:12 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ SRC = deal_with_d.c \
 		deal_with_oct_start.c \
 		deal_with_c_start.c \
 		deal_with_s_start.c \
+		deal_with_xX_start.c \
 
 OBJ_PATH = ./libft/
 INCLUDE = -I ./ft_printf.h -I ./libft/libft.h

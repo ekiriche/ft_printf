@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:01:11 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/02 17:31:51 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:46:48 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	error_handler(t_format *chunk)
 {
+	if (chunk->conversion == 'x' || chunk->conversion == 'X')
+	{
+		chunk->plus = 0;
+		chunk->space = 0;
+	}
 	if (chunk->conversion == 's')
 	{
 		chunk->zero = 0;
