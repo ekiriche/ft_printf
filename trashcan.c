@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/02 15:13:47 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 17:48:57 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	case_point0(t_format *chunk)
 		ft_putchar(' ');
 	if (chunk->space == 1)
 		ft_putchar(' ');
+	if (chunk->conversion == 'o' && chunk->hash == 1)
+		ft_putchar('0');
 
 }
 

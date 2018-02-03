@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 16:19:56 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/03 19:03:23 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	deal_with_xX(t_format *chunk, va_list arg, int *count)
 {
-	if (ft_strcmp(chunk->length_flag, "none") == 0)
+	if (ft_strcmp(chunk->length_flag, "none") == 0 &&
+			chunk->conversion != 'p')
 		deal_with_xX1(chunk, arg, count);
 	else if (ft_strcmp(chunk->length_flag, "ll") == 0 ||
 			ft_strcmp(chunk->length_flag, "l") == 0 ||
 			ft_strcmp(chunk->length_flag, "z") == 0 ||
 			ft_strcmp(chunk->length_flag, "j") == 0 ||
-			ft_strcmp(chunk->length_flag, "t") == 0)
+			ft_strcmp(chunk->length_flag, "t") == 0 ||
+			chunk->conversion == 'p')
 		deal_with_xX2(chunk, arg, count);
 	else if (ft_strcmp(chunk->length_flag, "h") == 0)
 		deal_with_xX3(chunk, arg, count);
@@ -52,8 +54,26 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 	char					*ans;
 
 	i = va_arg(arg, unsigned long long int);
-	if (chunk->conversion == 'x')
-		ans = ft_strdup(ft_dectohexsmall(i));
+	if (chunk->conversion == 'x' || chunk->conversion == 'p')
+	{
+		if (chunk->conversion == 'x')
+			ans = ft_strdup(ft_dectohexsmall(i));
+		else
+		{
+			if (i == 0)
+			{
+				ans = ft_strdup("0x0");
+				chunk->hash = 0;
+				chunk->conversion = 'x';
+			}
+			else
+			{
+				ans = ft_strdup(ft_dectohexsmall(i));
+				chunk->conversion = 'x';
+				chunk->hash = 1;
+			}
+		}
+	}
 	else if (chunk->conversion == 'X')
 		ans = ft_strdup(ft_dectohex(i));
 	else if (chunk->conversion == 'u')
@@ -115,6 +135,9 @@ void	counting_xX(t_format *chunk, char *str, int *count)
 		*count += 2;
 	if (chunk->hash == 1 && chunk->precision == 0 && chunk->field_width == 0 &&
 			ft_strcmp(str, "0") != 0 && chunk->conversion == 'o')
+		*count += 1;
+	if (ft_find_point0(chunk) && ft_strcmp(str, "0") == 0 && chunk->hash == 1
+			&& chunk->conversion == 'o')
 		*count += 1;
 }
 
