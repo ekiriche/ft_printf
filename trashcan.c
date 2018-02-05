@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 13:04:05 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 15:51:07 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,50 @@ unsigned long long int	ft_dectooctlong(unsigned long long int num)
 		i *= 10;
 	}
 	return (ans);
+}
+
+void	ft_putwchar(wchar_t wc)
+{
+	if (wc <= 127)
+		ft_putchar(wc);
+	else if (wc <= 2047)
+	{
+		ft_putchar((wc >> 6) + 0xC0);
+		ft_putchar((wc & 0x3F) + 0x80);
+	}
+	else if (wc <= 65535)
+	{
+		ft_putchar((wc >> 12) + 0xE0);
+		ft_putchar(((wc >> 6) & 0x3F) + 0x80);
+		ft_putchar((wc & 0x3F) + 0x80);
+	}
+	else if (wc <= 1114111)
+	{
+		ft_putchar((wc >> 18) + 0xF0);
+		ft_putchar(((wc >> 12) & 0x3F) + 0x80);
+		ft_putchar(((wc >> 6) & 0x3F) + 0x80);
+		ft_putchar((wc & 0x3F) + 0x80);
+	}
+}
+
+void	ft_putwstring(wchar_t *str)
+{
+	while (*str)
+	{
+		ft_putwchar(*str);
+		str += 1;
+	}
+}
+
+wchar_t	*ft_wstrdup(wchar_t *src)
+{
+	wchar_t	*cp;
+
+	cp = (wchar_t*)malloc(sizeof(wchar_t) * ft_strlen((char*)src) + 1);
+	if (cp == NULL)
+		return (NULL);
+	if (src == NULL)
+		return (NULL);
+	ft_strcpy((char*)cp, (char*)src);
+	return (cp);
 }

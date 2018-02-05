@@ -6,12 +6,12 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 14:42:46 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 15:56:01 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+#include <locale.h>
 int		main(void)
 {
 	short int lul = 1;
@@ -38,6 +38,15 @@ int		main(void)
 //	printf("%d\n", ft_printf("mine: % 015.4d\n", -42));
 //	printf("them: %d\n", printf("them: % 05.4c\n", 97));
 //	printf("mine: %d\n", ft_printf("them: % 05.4c\n", 97));
-	printf("them: {%05.s}", NULL);
-	ft_printf("mine: {%05.s}", 0);
+	wchar_t ac = 536;
+	wchar_t *as = L"Á±≥";
+	setlocale(LC_ALL, "");
+//	printf("%lc\n", ac);
+//	printf("them: %d\n", printf("them: %C\n", L'ÁM-^L´'));
+//	printf("mine: %d\n", ft_printf("mine: %C\n", L'ÁM-^L´'));
+//	int asd = printf("%C", L'ÁM-^L´');
+//	int poin = ft_printf("%C", L'ÁM-^L´');
+//	printf("%d\n%d\n", asd, poin);
+	printf("them: %d\n", printf("them: %S\n", as));
+	printf("mine: %d\n", ft_printf("mine: %S\n", as));
 }
