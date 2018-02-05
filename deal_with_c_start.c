@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:38:49 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/02 18:39:30 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 14:29:56 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	step1_char(t_format *chunk, char c)
 	}
 	while (chunk->field_width > 1)
 	{
-		ft_putchar(' ');
+		if (chunk->zero == 1)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
 		chunk->field_width--;
 	}
 	ft_putchar(c);

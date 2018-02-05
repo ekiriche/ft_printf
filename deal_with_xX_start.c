@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 19:03:23 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 12:23:34 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,10 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 		{
 			if (i == 0)
 			{
-				ans = ft_strdup("0x0");
+				if (ft_find_point0(chunk))
+					ans = ft_strdup("0x");
+				else
+					ans = ft_strdup("0x0");
 				chunk->hash = 0;
 				chunk->conversion = 'x';
 			}

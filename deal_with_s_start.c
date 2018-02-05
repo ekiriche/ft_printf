@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 17:10:51 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 14:40:49 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	deal_with_s(t_format *chunk, va_list arg, int *count)
 {
-	if (ft_strcmp(chunk->length_flag, "none") == 0)
+//	if (ft_strcmp(chunk->length_flag, "none") == 0)
 		deal_with_s1(chunk, arg, count);
 	//	else if (ft_strcmp(chunk->length_flag, "l") == 0)
 	//		deal_with_s2(chunk, arg, count);
@@ -43,7 +43,8 @@ void	counting_string(t_format *chunk, char *str, int *count)
 	if ((unsigned long int)chunk->precision < ft_strlen(str) &&
 			chunk->precision != 0)
 		ft_strnclr(str, chunk->precision);
-	if ((unsigned long int)chunk->field_width > ft_strlen(str))
+	if ((unsigned long int)chunk->field_width > ft_strlen(str) ||
+			ft_find_point0(chunk))
 		*count += chunk->field_width;
 	else
 		*count += ft_strlen(str);
@@ -59,12 +60,26 @@ void	step1_string(t_format *chunk, char *str)
 	if ((unsigned long int)chunk->precision < ft_strlen(str) &&
 			chunk->precision != 0)
 		ft_strnclr(str, chunk->precision);
-	while ((unsigned long int)chunk->field_width > ft_strlen(str))
+	while ((unsigned long int)chunk->field_width > ft_strlen(str) &&
+			!ft_find_point0(chunk))
 	{
-		ft_putchar(' ');
+		if (chunk->zero == 1)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
 		chunk->field_width--;
 	}
-	ft_putstr(str);
+	if (ft_find_point0(chunk))
+		while (chunk->field_width > 0)
+		{
+			if (chunk->zero == 1)
+				ft_putchar('0');
+			else
+				ft_putchar(' ');
+			chunk->field_width--;
+		}
+	else
+		ft_putstr(str);
 }
 
 void	string_minus(t_format *chunk, char *str)

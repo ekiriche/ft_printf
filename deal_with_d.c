@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 14:24:28 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 14:25:22 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	di_longint_minus(t_format *chunk, long long int num)
 
 void	step1_di_int(t_format *chunk, int num)
 {
-	if (num < 0 && (chunk->zero == 1 || chunk->precision > chunk->field_width))
+	if (chunk->zero == 1 && chunk->precision <= ft_nbrlen(num) &&
+			chunk->field_width > ft_nbrlen(num))
 	{
 		negative_number_and_zero(chunk, num);
 		return ;
@@ -118,21 +119,23 @@ void	step1_di_int(t_format *chunk, int num)
 		chunk->field_width--;
 	if (chunk->plus == 1 || chunk->space == 1)
 		chunk->field_width--;
-	if (chunk->zero == 1 && chunk->precision == 0 && chunk->field_width > ft_nbrlen(num))
-	{
-		chunk->precision = chunk->field_width;
-		chunk->field_width = 0;
-	}
+	if (num < 0 && chunk->precision > ft_nbrlen(num))
+		chunk->field_width--;
 	if (chunk->precision < ft_nbrlen(num))
 		chunk->precision = ft_nbrlen(num);
 	while (chunk->field_width-- > chunk->precision)
 		ft_putchar(' ');
 	if (chunk->hash == 1 && chunk->conversion == 'o' && num != 0)
 		ft_putchar('0');
-	if (chunk->plus == 1 && num >= 0)
-		ft_putchar('+');
 	if (chunk->space == 1)
 		ft_putchar(' ');
+	if (chunk->plus == 1 && num >= 0)
+		ft_putchar('+');
+	if (num < 0 && chunk->precision > ft_nbrlen(num))
+	{
+		ft_putchar('-');
+		num = -num;
+	}
 	while (chunk->precision-- > ft_nbrlen(num))
 		ft_putchar('0');
 	ft_putnbr(num);
@@ -143,13 +146,19 @@ void	di_int_minus(t_format *chunk, int num)
 	if (chunk->plus == 1 || chunk->space == 1)
 	{
 		if (chunk->plus == 1 && num >= 0)
-			ft_putchar('+');
-		if (chunk->space == 1)
-			ft_putchar(' ');
-		chunk->field_width--;
+		{	ft_putchar('+');
+	//	if (chunk->space == 1)
+	//		ft_putchar(' ');
+		chunk->field_width--;}
 	}
 	if (chunk->hash == 1 && chunk->conversion == 'o' && num != 0)
 		chunk->field_width--;
+	if (num < 0 && chunk->precision > ft_nbrlen(num))
+	{
+		ft_putchar('-');
+		num = -num;
+		chunk->field_width--;
+	}
 	while (chunk->precision > ft_nbrlen(num))
 	{
 		ft_putchar('0');

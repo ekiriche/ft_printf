@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 19:21:27 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 14:42:46 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ int		main(void)
 //	printf("%i\n", ft_printf("mine: %#10x\n", -25000000));
 //	printf("%i\n", printf("them: %#10x\n", -25000000));
 //	ft_printf("%#0 +-10.5llo\n", g);
-	printf("%d\n", printf("them: %.4d\n", -424242));
-	printf("%d\n", ft_printf("mine: %.4d\n", -424242));
+//		printf("%d\n", printf("them: %.p, %.0p", 0, 0));
+//		printf("%d\n", ft_printf("mine: %.p, %.0p", 0, 0));
+//		printf("%d\n", printf("them{%03c}", 0));
+//		printf("%d\n", ft_printf("mine{%03c}", 0));
+//	printf("{%03c}", 4);
+//	printf("%hhC, %hhC", 0, 97);
+//	printf("%d\n", ft_printf("mine: % 015.4d\n", -42));
+//	printf("them: %d\n", printf("them: % 05.4c\n", 97));
+//	printf("mine: %d\n", ft_printf("them: % 05.4c\n", 97));
+	printf("them: {%05.s}", NULL);
+	ft_printf("mine: {%05.s}", 0);
 }

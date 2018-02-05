@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 19:00:34 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 12:13:22 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/05 12:45:39 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	deal_with_di1(t_format *chunk, va_list arg, int *count)
 		case_point0(chunk);
 		return ;
 	}
-	if (i < 0 && chunk->precision > chunk->field_width)
+	if (i < 0 && chunk->precision > chunk->field_width &&
+			chunk->precision > ft_nbrlen(i))
 		*count += 1;
 	step1_di_int(chunk, i);
 }
@@ -55,7 +56,8 @@ void	deal_with_di2(t_format *chunk, va_list arg, int *count)
 		case_point0(chunk);
 		return ;
 	}
-	if (li < 0 && chunk->precision > chunk->field_width)
+	if (li < 0 && chunk->precision > chunk->field_width &&
+			chunk->precision > ft_nbrlenlong(li))
 		*count += 1;
 	step1_di_li(chunk, li);
 }
@@ -71,7 +73,8 @@ void	deal_with_di3(t_format *chunk, va_list arg, int *count)
 		case_point0(chunk);
 		return ;
 	}
-	if (i < 0 && chunk->precision > chunk->field_width)
+	if (i < 0 && chunk->precision > chunk->field_width &&
+			chunk->precision >ft_nbrlen(i))
 		*count += 1;
 	step1_di_int(chunk, i);
 }
@@ -87,7 +90,8 @@ void	deal_with_di4(t_format *chunk, va_list arg, int *count)
 		case_point0(chunk);
 		return ;
 	}
-	if (i < 0 && chunk->precision > chunk->field_width)
+	if (i < 0 && chunk->precision > chunk->field_width &&
+			chunk->precision > ft_nbrlen(i))
 		*count += 1;
 	step1_di_int(chunk, i);
 }
