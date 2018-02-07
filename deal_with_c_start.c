@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:38:49 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 15:17:38 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 15:34:42 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ void	deal_with_c2(t_format *chunk, va_list arg, int *count)
 
 	c = va_arg(arg, int);
 	counting_char(chunk, count);
-	if (c > 127)
+	if (c > 127 && c <= 2047)
 		*count += 1;
+	else if (c > 2047 && c <= 65535)
+		*count += 2;
+	else if (c > 65535)
+		*count += 3;
 	step1_wchar(chunk, c);
 }
 

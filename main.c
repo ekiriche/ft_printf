@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 15:56:01 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:46:25 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,21 @@ int		main(void)
 //	printf("mine: %d\n", ft_printf("them: % 05.4c\n", 97));
 	wchar_t ac = 536;
 	wchar_t *as = L"Á±≥";
-	setlocale(LC_ALL, "");
+	setlocale(LC_ALL, "en_US.UTF-8");
 //	printf("%lc\n", ac);
 //	printf("them: %d\n", printf("them: %C\n", L'ÁM-^L´'));
 //	printf("mine: %d\n", ft_printf("mine: %C\n", L'ÁM-^L´'));
 //	int asd = printf("%C", L'ÁM-^L´');
 //	int poin = ft_printf("%C", L'ÁM-^L´');
 //	printf("%d\n%d\n", asd, poin);
-	printf("them: %d\n", printf("them: %S\n", as));
-	printf("mine: %d\n", ft_printf("mine: %S\n", as));
+//	printf("them: %d\n", printf("them: %S\n", as));
+//	printf("mine: %d\n", ft_printf("mine: %S\n", as));
+//	printf("%.4S\n", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+//	ft_printf("%.4S", L"ÊM-M-^QÊM-^XØ‰∏M-ÂM-^O™ÁM-^L´„M-M-^B");
+//	printf("them: %.5p\n", 1);
+//	ft_printf("mine: %.5p\n", 1);
+//	printf("them: %d\n", printf("%C\n", 976));
+//	printf("mine: %d\n", ft_printf("%C\n", 976));
+	printf("%.4S\n", L"我是一只猫。");
+	ft_printf("%.4S\n", L"我是一只猫。");
 }

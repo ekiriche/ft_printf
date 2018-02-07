@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 15:52:04 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 16:03:18 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
+void	ft_wstrnclr(wchar_t *str, int	start);
+size_t	ft_wstrlen(wchar_t *str);
+void	trouble_maker(t_format *chunk, int *count);
 wchar_t	*ft_wstrdup(wchar_t *str);
 void	deal_with_s2(t_format *chunk, va_list arg, int *count);
 void	step1_wstring(t_format *chunk, wchar_t *str);

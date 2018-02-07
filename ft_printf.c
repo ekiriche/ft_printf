@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 15:51:23 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 14:22:18 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,16 @@ int		ft_printf(const char *fmt, ...)
 			fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
-			//			printf("Format: %s\n", chunk->format);
-			//			printf("Len: %i\n", chunk->len_format);
-			do_smth(chunk);
-			ultimate_handler(chunk, arg, &count);
-			//			printf("\n");
+			if (pepePls(chunk->format[size_of_chunk(fmt) - 1]))
+			{
+				trouble_maker(chunk, &count);
+				return (count);
+			}
+			else
+			{
+				do_smth(chunk);
+				ultimate_handler(chunk, arg, &count);
+			}
 			while (chunk->len_format != 0)
 			{
 				fmt++;
@@ -268,7 +273,7 @@ int		size_of_chunk(const char *str)
 	int	len;
 
 	len = 0;
-	while (pepePls(*str))
+	while (pepePls(*str) && *str != '\0')
 	{
 		len++;
 		str++;

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/05 12:23:34 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 12:43:36 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 				ans = ft_strdup(ft_dectohexsmall(i));
 				chunk->conversion = 'x';
 				chunk->hash = 1;
+				if ((size_t)chunk->field_width - 1 == ft_strlen(ans))
+					*count += 1;
+				else if ((size_t)chunk->field_width - 1 < ft_strlen(ans))
+					*count += 2;
 			}
 		}
 	}
