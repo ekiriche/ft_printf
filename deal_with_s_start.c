@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 16:51:00 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 17:40:35 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,19 @@ void	deal_with_s2(t_format *chunk, va_list arg, int *count)
 		return ;
 	}
 //	counting_string(chunk, (char*)str, count);
-	while (str[i] != '\0')
+	if (chunk->precision != 0)
+	{
+		if (str[i] > 127 && str[i] <= 2047)
+			*count += 2;
+		else if (str[i] > 2047 && str[i] <= 65535)
+			*count += 3;
+		else if (str[i] > 65535)
+			*count += 4;
+		else if (str[i] <= 127)
+			*count += 1;
+		*count += chunk->field_width - 1;
+	}
+	else while (str[i] != '\0')
 	{
 		if (str[i] > 127 && str[i] <= 2047)
 			*count += 2;
@@ -72,9 +84,6 @@ void	step1_wstring(t_format *chunk, wchar_t *str)
 		wstring_minus(chunk, str);
 		return ;
 	}
-	if ((unsigned long int)chunk->precision < ft_wstrlen(str) &&
-			chunk->precision != 0)
-		ft_wstrnclr(str, chunk->precision);
 	while ((unsigned long int)chunk->field_width > ft_wstrlen(str) &&
 			!ft_find_point0(chunk))
 	{
@@ -95,37 +104,34 @@ void	step1_wstring(t_format *chunk, wchar_t *str)
 		}
 	else
 	{
-//		while (chunk->precision > 0)
-//		{
-//			*str += 1;
-//			chunk->precision -= 1;
-//		}
-		ft_putwstring(str);
+		if (chunk->precision != 0 && (size_t)chunk->precision < ft_wstrlen(str))
+		{
+			while (chunk->field_width > chunk->precision - 1 &&
+			!ft_find_point0(chunk))
+			{
+				if (chunk->zero == 1)
+					ft_putchar('0');
+				else
+					ft_putchar(' ');
+				chunk->field_width--;
+			}
+			ft_putwchar(str[0]);
+		}
+		else
+			ft_putwstring(str);
 	}
 }
 
 void	wstring_minus(t_format *chunk, wchar_t *str)
 {
-	if ((unsigned long int)chunk->precision < ft_wstrlen(str) &&
-			chunk->precision != 0)
-		ft_wstrnclr(str, chunk->precision);
-	ft_putwstring(str);
+	if (chunk->precision != 0 && (size_t)chunk->precision < ft_wstrlen(str))
+		ft_putwchar(str[0]);
+	else
+		ft_putwstring(str);
 	while ((unsigned long int)chunk->field_width > ft_wstrlen(str))
 	{
 		ft_putchar(' ');
 		chunk->field_width--;
-	}
-}
-
-void	ft_wstrnclr(wchar_t *str, int	start)
-{
-	int	i;
-
-	i = 0;
-	while (str[start + i] != L'\0')
-	{
-		str[start + i] = L'\0';
-		i++;
 	}
 }
 

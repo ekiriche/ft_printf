@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 16:46:25 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/07 17:16:57 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ int		main(void)
 //	ft_printf("mine: %.5p\n", 1);
 //	printf("them: %d\n", printf("%C\n", 976));
 //	printf("mine: %d\n", ft_printf("%C\n", 976));
-	printf("%.4S\n", L"我是一只猫。");
-	ft_printf("%.4S\n", L"我是一只猫。");
+	printf("t: %15.4S\n", L"我是一只猫。");
+	ft_printf("m: %15.4S\n", L"我是一只猫。");
 }
