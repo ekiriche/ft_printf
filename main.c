@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 17:57:49 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/08 19:00:33 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int		main(void)
 //	ft_printf("mine: %.5p\n", 1);
 //	printf("them: %d\n", printf("%C\n", 976));
 //	printf("mine: %d\n", ft_printf("%C\n", 976));
-//	printf("t: %15.4S\n", L"我是一只猫。");
-//	ft_printf("m: %15.4S\n", L"我是一只猫。");
-	printf("t: %d\n", printf("{%#.5x\n}", 1));
-	printf("m: %d\n", ft_printf("{%#.5x\n}", 1));
+//	printf("t: %d\n", printf("t: {%05.S}", L"42 c est cool"));
+//	printf("m: %d\n", ft_printf("m: {%05.S}", L"42 c est cool"));
+//	ft_printf("%10.7d\n", 123);
+	printf("t: %d\n", printf("%-12p", &k));
+	printf("m: %d\n", ft_printf("%-12p", &k));
 }

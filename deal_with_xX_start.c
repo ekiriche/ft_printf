@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 17:56:23 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/08 19:00:18 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,18 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 					ans = ft_strdup("0x0");
 				chunk->hash = 0;
 				chunk->conversion = 'x';
+				kill_me(chunk, ans, count);
+				return ;
 			}
 			else
 			{
 				ans = ft_strdup(ft_dectohexsmall(i));
 				chunk->conversion = 'x';
 				chunk->hash = 1;
-				if ((size_t)chunk->field_width - 1 == ft_strlen(ans))
-					*count += 1;
-				else if ((size_t)chunk->field_width - 1 < ft_strlen(ans))
-					*count += 2;
+//				if ((size_t)chunk->field_width - 1 == ft_strlen(ans))
+//					*count += 1;
+//				else if ((size_t)chunk->field_width - 1 < ft_strlen(ans))
+//					*count += 2;
 			}
 		}
 	}
@@ -89,6 +91,46 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 		ans = ft_dectooct(i);
 	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans);
+}
+
+void	kill_me(t_format *chunk, char *str, int *count)
+{
+	int lul;
+
+	lul = (int)ft_strlen(str);
+	if (chunk->minus == 0)
+	{
+		while (chunk->field_width - lul - chunk->precision > 0)
+		{
+			ft_putchar(' ');
+			chunk->field_width--;
+			*count += 1;
+		}
+		ft_putstr(str);
+		*count += (int)ft_strlen(str);
+		while (chunk->precision-- - 1 > 0)
+		{
+			ft_putchar('0');
+			*count += 1;
+		}
+	}
+	else
+	{
+		while (chunk->precision - 1 > 0)
+		{
+			ft_putchar('0');
+			*count += 1;
+			chunk->precision--;
+		}
+		ft_putstr(str);
+		*count += (int)ft_strlen(str);
+		while (chunk->field_width - lul - chunk->precision > 0)
+		{
+			*count += 1;
+			ft_putchar(' ');
+			chunk->field_width--;
+		}
+	}
 }
 
 void	deal_with_xX3(t_format *chunk, va_list arg, int *count)
@@ -140,6 +182,10 @@ void	counting_xX(t_format *chunk, char *str, int *count)
 			ft_strcmp(str, "0") != 0 && (chunk->conversion == 'x' ||
 				chunk->conversion == 'X'))
 		*count += 2;
+	if (chunk->hash == 1 && chunk->precision >= (int)ft_strlen(str) &&
+	chunk->precision >= chunk->field_width && chunk->conversion != 'u' &&
+	chunk->conversion != 'o')
+		*count += 2;
 	if (chunk->hash == 1 && chunk->precision == 0 && chunk->field_width == 0 &&
 			ft_strcmp(str, "0") != 0 && chunk->conversion == 'o')
 		*count += 1;
@@ -184,7 +230,10 @@ void	step1_xX_int(t_format *chunk, char *str)
 		ft_putstr("0X");
 	else if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'o')
+	{
+		chunk->precision--;
 		ft_putchar('0');
+	}
 	while((size_t)chunk->precision-- > ft_strlen(str))
 		ft_putchar('0');
 	ft_putstr(str);

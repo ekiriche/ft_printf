@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 15:11:43 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/08 12:26:36 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_find_point0(t_format *chunk)
 	while (chunk->format[i + 1] != '\0')
 	{
 		if (chunk->format[i] == '.' && (chunk->format[i + 1] == '0' ||
-					chunk->format[i + 1] == chunk->conversion))
+					!pepePls(chunk->format[i + 1])))
 			return (1);
 		i++;
 	}
