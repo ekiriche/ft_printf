@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/08 17:51:57 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 12:18:09 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void	step1_wchar(t_format *chunk, wchar_t c);
 void	wchar_minus(t_format *chunk, wchar_t c);
 void	ft_putwchar(wchar_t c);
 void	counting_xX(t_format *chunk, char *str, int *count);
-void	xX_int_minus( t_format *chunk, char *str);
+void	xX_int_minus(t_format *chunk, char *str, int *count);
 void	deal_with_xX(t_format *chunk, va_list arg, int *count);
 void	deal_with_xX1(t_format *chunk, va_list arg, int *count);
 void	deal_with_xX2(t_format *chunk, va_list arg, int *count);
 void	deal_with_xX3(t_format *chunk, va_list arg, int *count);
 void	deal_with_xX4(t_format *chunk, va_list arg, int *count);
-void	step1_xX_int(t_format *chunk, char *str);
+void	step1_xX_int(t_format *chunk, char *str, int *count);
 void	step1_xX_longint(t_format *chunk, char *str);
 void	step1_string(t_format *chunk, char *str);
 void	string_minus(t_format *chunk, char *str);
@@ -73,19 +73,19 @@ void	deal_with_di1(t_format *chunk, va_list arg, int *count);
 void	deal_with_di2(t_format *chunk, va_list arg, int *count);
 void	deal_with_di3(t_format *chunk, va_list arg, int *count);
 void	deal_with_di4(t_format *chunk, va_list arg, int *count);
-void	case_point0(t_format *chunk);
+void	case_point0(t_format *chunk, int *count);
 int		ft_find_point0(t_format *chunk);
-void	negative_number_and_zero(t_format *chunk, long long int num);
+void	negative_number_and_zero(t_format *chunk, long long int num, int *count);
 void	counting(t_format *chunk, long long int li, int *count);
-void	step1_di_longint(t_format *chunk, long long int num);
-void	di_longint_minus(t_format *chunk, long long int num);
+void	step1_di_longint(t_format *chunk, long long int num, int *count);
+void	di_longint_minus(t_format *chunk, long long int num, int *count);
 int		ft_nbrlenlong(long long int num);
 void	ft_putnbrlong(long long int num);
-void	step1_di_li(t_format *chunk, long long int num);
-void	di_int_minus(t_format *chunk, int num);
+void	step1_di_li(t_format *chunk, long long int num, int *count);
+void	di_int_minus(t_format *chunk, int num, int *count);
 void	ultimate_handler(t_format *chunk, va_list arg, int *count);
 void	error_handler(t_format *chunk);
-void	step1_di_int(t_format *chunk, int num);
+void	step1_di_int(t_format *chunk, int num, int *count);
 void	print_smth(t_format *chunk, va_list arg);
 void	minus_present(t_format *chunk);
 void	plus_present(t_format *chunk);

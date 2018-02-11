@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/08 19:00:33 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 13:14:25 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int		main(void)
 //	printf("t: %d\n", printf("t: {%05.S}", L"42 c est cool"));
 //	printf("m: %d\n", ft_printf("m: {%05.S}", L"42 c est cool"));
 //	ft_printf("%10.7d\n", 123);
-	printf("t: %d\n", printf("%-12p", &k));
-	printf("m: %d\n", ft_printf("%-12p", &k));
+//	printf("t: %d\n", printf("%-12p", &k));
+//	printf("m: %d\n", ft_printf("%-12p", &k));
+	printf("%d\n", printf("%03.2ld\n", 42));
+	printf("%d\n", ft_printf("%03.2ld\n", 42));
 }

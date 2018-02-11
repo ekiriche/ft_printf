@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/08 19:00:18 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 12:24:24 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	deal_with_xX1(t_format *chunk, va_list arg, int *count)
 		ans = ft_itoa_unsign((unsigned long long int)i);
 	else
 		ans = ft_dectooct((unsigned long long int)i);
-	counting_xX(chunk, ans, count);
-	step1_xX_int(chunk, ans);
+//	counting_xX(chunk, ans, count);
+	step1_xX_int(chunk, ans, count);
 }
 
 void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
@@ -89,8 +89,8 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 		ans = ft_itoa_unsign(i);
 	else
 		ans = ft_dectooct(i);
-	counting_xX(chunk, ans, count);
-	step1_xX_int(chunk, ans);
+//	counting_xX(chunk, ans, count);
+	step1_xX_int(chunk, ans, count);
 }
 
 void	kill_me(t_format *chunk, char *str, int *count)
@@ -147,8 +147,8 @@ void	deal_with_xX3(t_format *chunk, va_list arg, int *count)
 		ans = ft_itoa_unsign((unsigned long long int)i);
 	else
 		ans = ft_dectooct((unsigned long long int)i);
-	counting_xX(chunk, ans, count);
-	step1_xX_int(chunk, ans);
+//	counting_xX(chunk, ans, count);
+	step1_xX_int(chunk, ans, count);
 }
 
 void	deal_with_xX4(t_format *chunk, va_list arg, int *count)
@@ -165,8 +165,8 @@ void	deal_with_xX4(t_format *chunk, va_list arg, int *count)
 		ans = ft_itoa_unsign((unsigned long long int)i);
 	else
 		ans = ft_dectooct((unsigned long long int)i);
-	counting_xX(chunk, ans, count);
-	step1_xX_int(chunk, ans);
+//	counting_xX(chunk, ans, count);
+	step1_xX_int(chunk, ans, count);
 }
 
 void	counting_xX(t_format *chunk, char *str, int *count)
@@ -194,16 +194,16 @@ void	counting_xX(t_format *chunk, char *str, int *count)
 		*count += 1;
 }
 
-void	step1_xX_int(t_format *chunk, char *str)
+void	step1_xX_int(t_format *chunk, char *str, int *count)
 {
 	if (ft_find_point0(chunk) && ft_strcmp(str, "0") == 0)
 	{
-		case_point0(chunk);
+		case_point0(chunk, count);
 		return ;
 	}
 	if (chunk->minus == 1 && chunk->field_width != 0)
 	{
-		xX_int_minus(chunk, str);
+		xX_int_minus(chunk, str, count);
 		return ;
 	}
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
@@ -221,25 +221,39 @@ void	step1_xX_int(t_format *chunk, char *str)
 	if ((size_t)chunk->precision < ft_strlen(str))
 		chunk->precision = (int)ft_strlen(str);
 	while (chunk->field_width-- > chunk->precision)
+	{
+		*count += 1;
 		ft_putchar(' ');
+	}
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'x')
+	{
+		*count += 2;
 		ft_putstr("0x");
+	}
 	else if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'X')
+	{
+		*count += 2;
 		ft_putstr("0X");
+	}
 	else if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'o')
 	{
 		chunk->precision--;
 		ft_putchar('0');
+		*count += 1;
 	}
 	while((size_t)chunk->precision-- > ft_strlen(str))
+	{
+		*count += 1;
 		ft_putchar('0');
+	}
 	ft_putstr(str);
+	*count += (int)ft_strlen(str);
 }
 
-void	xX_int_minus(t_format *chunk, char *str)
+void	xX_int_minus(t_format *chunk, char *str, int *count)
 {
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 	(chunk->conversion == 'x' || chunk->conversion == 'X'))
@@ -250,22 +264,34 @@ void	xX_int_minus(t_format *chunk, char *str)
 	while ((size_t)chunk->precision > ft_strlen(str))
 	{
 		ft_putchar('0');
+		*count += 1;
 		chunk->precision--;
 		chunk->field_width--;
 	}
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'x')
+	{
+		*count += 2;
 		ft_putstr("0x");
+	}
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'X')
+	{
+		*count += 2;
 		ft_putstr("0X");
+	}
 	if (chunk->hash == 1 &&ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'o')
+	{
+		*count += 1;
 		ft_putchar('0');
+	}
 	ft_putstr(str);
+	*count += (int)ft_strlen(str);
 	while(chunk->field_width > (int)ft_strlen(str))
 	{
 		ft_putchar(' ');
+		*count += 1;
 		chunk->field_width--;
 	}
 }
