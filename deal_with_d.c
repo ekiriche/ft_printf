@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 17:57:05 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:10:08 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,9 @@ void	di_longint_minus(t_format *chunk, long long int num, int *count)
 
 void	step1_di_int(t_format *chunk, int num, int *count)
 {
-	if (chunk->zero == 1 && chunk->precision <= ft_nbrlen(num) &&
-			chunk->field_width > ft_nbrlen(num))
+//	if (chunk->zero == 1 && chunk->precision <= ft_nbrlen(num) &&
+//			chunk->field_width > ft_nbrlen(num))
+	if (chunk->zero == 1 && chunk->precision <= ft_nbrlen(num))
 	{
 		negative_number_and_zero(chunk, num, count);
 		return ;
