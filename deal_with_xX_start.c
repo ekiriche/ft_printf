@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 12:24:24 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 16:13:39 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,23 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 	step1_xX_int(chunk, ans, count);
 }
 
+//void	rend_me(t_format *chunk, char *str, int *count)
+//{
+//
+//}
+
 void	kill_me(t_format *chunk, char *str, int *count)
 {
 	int lul;
 
 	lul = (int)ft_strlen(str);
+//	if (chunk->zero == 1 && chunk->minus == 0)
+//	{
+//		rend_me(chunk, str, count);
+//		return ;
+//	}
+	if (chunk->zero == 1 && chunk->minus == 0)
+		chunk->precision = chunk->field_width - lul + 1;
 	if (chunk->minus == 0)
 	{
 		while (chunk->field_width - lul - chunk->precision > 0)
@@ -116,13 +128,16 @@ void	kill_me(t_format *chunk, char *str, int *count)
 	}
 	else
 	{
+		ft_putstr(str);
+		if (chunk->precision - 1 > 0)
+			chunk->field_width++;
 		while (chunk->precision - 1 > 0)
 		{
 			ft_putchar('0');
 			*count += 1;
 			chunk->precision--;
+			chunk->field_width--;
 		}
-		ft_putstr(str);
 		*count += (int)ft_strlen(str);
 		while (chunk->field_width - lul - chunk->precision > 0)
 		{
@@ -261,13 +276,6 @@ void	xX_int_minus(t_format *chunk, char *str, int *count)
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'o')
 		chunk->field_width--;
-	while ((size_t)chunk->precision > ft_strlen(str))
-	{
-		ft_putchar('0');
-		*count += 1;
-		chunk->precision--;
-		chunk->field_width--;
-	}
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'x')
 	{
@@ -285,6 +293,13 @@ void	xX_int_minus(t_format *chunk, char *str, int *count)
 	{
 		*count += 1;
 		ft_putchar('0');
+	}
+	while ((size_t)chunk->precision > ft_strlen(str))
+	{
+		ft_putchar('0');
+		*count += 1;
+		chunk->precision--;
+		chunk->field_width--;
 	}
 	ft_putstr(str);
 	*count += (int)ft_strlen(str);

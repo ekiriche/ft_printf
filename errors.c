@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:01:11 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 17:11:19 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 17:49:34 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,48 +46,31 @@ void	error_handler(t_format *chunk)
 
 void	trouble_maker(t_format *chunk, int *count)
 {
-	char	*ptr;
+	int	i;
+	int	end;
 
-	ptr = ft_strdup(chunk->format);
-	while ((*ptr < '1' || *ptr > '9') && *ptr != '\0' && *ptr != '.')
+	i = 0;
+	end = (int)ft_strlen(chunk->format);
+	while (end > 0)
 	{
-		if (*ptr == '-')
-			chunk->minus = 1;
-		if (*ptr == '0')
-			chunk->zero = 1;
-		ptr++;
-	}
-	chunk->field_width = ft_atoi(ptr);
-	while (*ptr >= '0' && *ptr <= '9')
-		ptr++;
-	if (*ptr == '.')
-	{
-		ptr++;
-		while (*ptr >= '0' && *ptr <= '9')
-			ptr++;
-	}
-	*count += chunk->field_width - 1;
-	*count += (int)ft_strlen(ptr);
-	if (chunk->minus == 1)
-	{
-		ft_putstr(ptr);
-		while (chunk->field_width-- - 1 > 0)
+		if (chunk->format[end - 1] != 'l' && chunk->format[end - 1] != 'h'
+		&& chunk->format[end - 1] != 'j' && chunk->format[end - 1] != 'z' &&
+		((chunk->format[end - 1] >= 'a' && chunk->format[end - 1] <= 'z') ||
+		 (chunk->format[end - 1] >= 'A' && chunk->format[end - 1] <= 'Z')))
 		{
-			if (chunk->zero == 1)
-				ft_putchar('0');
-			else
-				ft_putchar(' ');
+			look_for_field_width(chunk);
+			*count += chunk->field_width;
+			zero_present(chunk);
+			minus_present(chunk);
+			step1_char(chunk, chunk->format[end - 1]);
+			break ;
 		}
+		end--;
 	}
-	else
+	while (end < (int)ft_strlen(chunk->format))
 	{
-		while (chunk->field_width-- - 1 > 0)
-		{
-			if (chunk->zero == 1)
-				ft_putchar('0');
-			else
-				ft_putchar(' ');
-		}
-		ft_putstr(ptr);
+		ft_putchar(chunk->format[end]);
+		*count += 1;
+		end++;
 	}
 }

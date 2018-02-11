@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/07 14:22:18 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 17:54:20 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	minus_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (pepePls(chunk->format[i]))
+	while (chunk->format[i] && pepePls(chunk->format[i]))
 	{
 		if (chunk->format[i] == '-')
 		{
@@ -142,7 +142,7 @@ void	zero_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (pepePls(chunk->format[i]))
+	while (chunk->format[i] && pepePls(chunk->format[i]))
 	{
 		if (chunk->format[i] == '.')
 		{

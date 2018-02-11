@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 15:08:23 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 17:05:57 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	step1_di_int(t_format *chunk, int num, int *count);
 void	print_smth(t_format *chunk, va_list arg);
 void	minus_present(t_format *chunk);
 void	plus_present(t_format *chunk);
+void	zero_present(t_format *chunk);
 void	space_present(t_format *chunk);
 int		pepePls(char c);
 void	look_for_length_flag(t_format *chunk);

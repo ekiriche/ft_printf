@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 15:22:43 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 17:55:23 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ int		main(void)
 //	ft_printf("%.4S\n", L"我是一只猫。");
 //	printf("{%-15Z}", 123);
 //	ft_printf("{%-15Z}", 123);
-	printf("%d\n", printf("t:{% 05.5p}", 0));
-	printf("%d\n", ft_printf("m:{% 05.5p}", 0));
+//	printf("%d\n", printf("t:{%05p}", 1));
+//	printf("%d\n", ft_printf("m:{%05p}", 1));
+//	ft_printf("%C\n", L'�');
+//	ft_printf("%.5s\n", NULL);
+//	printf("t:%d\n", printf("{%05.Z}", 123));
+//	printf("m:%d\n", ft_printf("{%05.Z}", 123));
+//	printf("% 10Zoooo");
+//	ft_printf("% Zoooo");
+	ft_printf("%03.2d\n", -1);
 }
