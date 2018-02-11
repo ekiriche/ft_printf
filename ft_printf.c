@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 17:54:20 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:59:38 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_printf(const char *fmt, ...)
 				chunk->len_format--;
 			}
 			ft_memdel((void**)&chunk->format);
+			ft_memdel((void**)&chunk->length_flag);
 
 		}
 		else
@@ -218,8 +219,10 @@ void	look_for_length_flag(t_format *chunk)
 void	look_for_field_width(t_format *chunk)
 {
 	char	*ptr;
+	char	*lul;
 
 	ptr = ft_strdup(chunk->format);
+	lul = ptr;
 	while (*ptr < '1' || *ptr > '9')
 	{
 		if (!(pepePls(*ptr)) || *ptr == '.')
@@ -230,6 +233,7 @@ void	look_for_field_width(t_format *chunk)
 		ptr++;
 	}
 	chunk->field_width = ft_atoi(ptr);
+	ft_memdel((void**)&lul);
 }
 
 void	look_for_conversion(t_format *chunk)
@@ -255,8 +259,10 @@ void	look_for_conversion(t_format *chunk)
 void	look_for_precision(t_format *chunk)
 {
 	char *ptr;
+	char *lul;
 
 	ptr = ft_strdup(chunk->format);
+	lul = ptr;
 	while (*ptr != '.' && pepePls(*ptr))
 		ptr++;
 	if (!(pepePls(*ptr)))
@@ -266,6 +272,7 @@ void	look_for_precision(t_format *chunk)
 	}
 	ptr++;
 	chunk->precision = ft_atoi(ptr);
+	ft_memdel((void**)&lul);
 }
 
 int		size_of_chunk(const char *str)

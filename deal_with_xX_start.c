@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 16:13:39 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 18:58:53 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	deal_with_xX1(t_format *chunk, va_list arg, int *count)
 		ans = ft_dectooct((unsigned long long int)i);
 //	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans, count);
+	ft_memdel((void**)&ans);
 }
 
 void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
@@ -91,6 +92,7 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 		ans = ft_dectooct(i);
 //	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans, count);
+	ft_memdel((void**)&ans);
 }
 
 //void	rend_me(t_format *chunk, char *str, int *count)
@@ -164,6 +166,7 @@ void	deal_with_xX3(t_format *chunk, va_list arg, int *count)
 		ans = ft_dectooct((unsigned long long int)i);
 //	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans, count);
+	ft_memdel((void**)&ans);
 }
 
 void	deal_with_xX4(t_format *chunk, va_list arg, int *count)
@@ -182,6 +185,7 @@ void	deal_with_xX4(t_format *chunk, va_list arg, int *count)
 		ans = ft_dectooct((unsigned long long int)i);
 //	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans, count);
+	ft_memdel((void**)&ans);
 }
 
 void	counting_xX(t_format *chunk, char *str, int *count)
