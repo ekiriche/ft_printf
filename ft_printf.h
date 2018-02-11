@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 12:18:09 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/11 15:08:23 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ typedef struct		s_format
 
 void	kill_me(t_format *chunk, char *str, int *count);
 void	count_uni(wchar_t c, int *count);
-void	holy_crap(t_format *chunk);
+void	holy_crap(t_format *chunk, int *count);
 void	ft_wstrnclr(wchar_t *str, int	start);
 size_t	ft_wstrlen(wchar_t *str);
 void	trouble_maker(t_format *chunk, int *count);
 wchar_t	*ft_wstrdup(wchar_t *str);
 void	deal_with_s2(t_format *chunk, va_list arg, int *count);
-void	step1_wstring(t_format *chunk, wchar_t *str);
-void	wstring_minus(t_format *chunk, wchar_t *str);
+void	step1_wstring(t_format *chunk, wchar_t *str, int *count);
+void	wstring_minus(t_format *chunk, wchar_t *str, int *count);
 void	ft_putwstring(wchar_t *str);
 void	step1_wchar(t_format *chunk, wchar_t c);
 void	wchar_minus(t_format *chunk, wchar_t c);
@@ -57,8 +57,8 @@ void	deal_with_xX3(t_format *chunk, va_list arg, int *count);
 void	deal_with_xX4(t_format *chunk, va_list arg, int *count);
 void	step1_xX_int(t_format *chunk, char *str, int *count);
 void	step1_xX_longint(t_format *chunk, char *str);
-void	step1_string(t_format *chunk, char *str);
-void	string_minus(t_format *chunk, char *str);
+void	step1_string(t_format *chunk, char *str, int *count);
+void	string_minus(t_format *chunk, char *str, int *count);
 void	counting_string(t_format *chunk, char *str, int *count);
 void	deal_with_s(t_format *chunk, va_list arg, int *count);
 void	deal_with_s1(t_format *chunk, va_list arg, int *count);
