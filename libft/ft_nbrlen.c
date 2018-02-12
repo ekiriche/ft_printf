@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:04:52 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/01/29 16:12:16 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:53:55 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 int		ft_nbrlen(int n)
 {
-	int len;
+	int	len;
+	int	temp;
 
+	temp = n;
 	len = 1;
-	if (n < 0)
+	if (temp < 0)
 	{
 		len++;
-		n = -n;
+		temp = -temp;
 	}
-	while (n / 10 > 0)
+	while (temp / 10 > 0)
 	{
-		n /= 10;
+		temp /= 10;
 		len++;
 	}
 	return (len);

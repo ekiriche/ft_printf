@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/12 12:15:16 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:33:01 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		main(void)
 //	printf("mine: %d\n", ft_printf("them: % 05.4c\n", 97));
 	wchar_t ac = 536;
 	wchar_t *as = L"Á±≥";
-	//setlocale(LC_ALL, "en_US.UTF-8");
+	setlocale(LC_ALL, "en_US.UTF-8");
 //	printf("%lc\n", ac);
 //	printf("them: %d\n", printf("them: %C\n", L'ÁM-^L´'));
 //	printf("mine: %d\n", ft_printf("mine: %C\n", L'ÁM-^L´'));
@@ -76,7 +76,13 @@ int		main(void)
 //	printf("m:%d\n", ft_printf("{%05.Z}", 123));
 //	printf("% 10Zoooo");
 //	ft_printf("% Zoooo");
-	ft_printf("%03.2d\n", -1);
-	printf("%C\n", L'ø');
-	ft_printf("%C\n", L'ø');
+//	ft_printf("%03.2d\n", -1);
+//	printf("%C\n", L'ø');
+//	ft_printf("%C\n", L'ø');
+//	printf("%ll#x\n", 9223372036854775807);
+//	ft_printf("%ll#x\n", 9223372036854775807);
+//	printf("%0 3.2d\n", 1);
+//	ft_printf("%0 3.2d\n", 1);
+	printf("%0.6d\n", -12345);
+	ft_printf("%0#21o\n", -1372218040);
 }

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 14:58:38 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 18:57:00 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:29:48 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	negative_number_and_zero(t_format *chunk, long long int num, int *count)
 {
-	if (chunk->space == 1)
+	if (chunk->space == 1 && (chunk->field_width - 1 > (int)ft_nbrlenlong(num) || chunk->field_width == 0))
 	{
 		chunk->field_width--;
 		*count += 1;

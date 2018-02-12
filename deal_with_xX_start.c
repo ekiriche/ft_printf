@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 18:58:53 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:11:24 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void	counting_xX(t_format *chunk, char *str, int *count)
 	if (chunk->field_width > chunk->precision &&
 			chunk->field_width > (int)ft_strlen(str))
 		*count += chunk->field_width;
-	else if ((size_t)chunk->precision > ft_strlen(str))
+	else if (chunk->precision > (int)ft_strlen(str))
 		*count += chunk->precision;
 	else if (!(ft_find_point0(chunk) && ft_strcmp(str, "0") == 0))
 		*count += (int)ft_strlen(str);
@@ -232,12 +232,12 @@ void	step1_xX_int(t_format *chunk, char *str, int *count)
 	chunk->conversion == 'o')
 		chunk->field_width--;
 	if (chunk->zero == 1 && chunk->precision == 0 &&
-			(size_t)chunk->field_width > ft_strlen(str))
+			chunk->field_width > (int)ft_strlen(str))
 	{
 		chunk->precision = chunk->field_width;
 		chunk->field_width = 0;
 	}
-	if ((size_t)chunk->precision < ft_strlen(str))
+	if (chunk->precision < (int)ft_strlen(str))
 		chunk->precision = (int)ft_strlen(str);
 	while (chunk->field_width-- > chunk->precision)
 	{
@@ -263,7 +263,7 @@ void	step1_xX_int(t_format *chunk, char *str, int *count)
 		ft_putchar('0');
 		*count += 1;
 	}
-	while((size_t)chunk->precision-- > ft_strlen(str))
+	while(chunk->precision-- > (int)ft_strlen(str))
 	{
 		*count += 1;
 		ft_putchar('0');
@@ -298,7 +298,7 @@ void	xX_int_minus(t_format *chunk, char *str, int *count)
 		*count += 1;
 		ft_putchar('0');
 	}
-	while ((size_t)chunk->precision > ft_strlen(str))
+	while (chunk->precision > (int)ft_strlen(str))
 	{
 		ft_putchar('0');
 		*count += 1;
