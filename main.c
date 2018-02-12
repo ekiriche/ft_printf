@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 17:55:23 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 12:15:16 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		main(void)
 //	printf("mine: %d\n", ft_printf("them: % 05.4c\n", 97));
 	wchar_t ac = 536;
 	wchar_t *as = L"Á±≥";
-	setlocale(LC_ALL, "en_US.UTF-8");
+	//setlocale(LC_ALL, "en_US.UTF-8");
 //	printf("%lc\n", ac);
 //	printf("them: %d\n", printf("them: %C\n", L'ÁM-^L´'));
 //	printf("mine: %d\n", ft_printf("mine: %C\n", L'ÁM-^L´'));
@@ -77,4 +77,6 @@ int		main(void)
 //	printf("% 10Zoooo");
 //	ft_printf("% Zoooo");
 	ft_printf("%03.2d\n", -1);
+	printf("%C\n", L'ø');
+	ft_printf("%C\n", L'ø');
 }

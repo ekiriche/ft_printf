@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:38:49 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 18:57:13 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 12:13:34 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	deal_with_c(t_format *chunk, va_list arg, int *count)
 {
-	if (ft_strcmp(chunk->length_flag, "none") == 0)
+	if (ft_strcmp(chunk->length_flag, "none") == 0 || MB_CUR_MAX == 1)
 		deal_with_c1(chunk, arg, count);
 	else if (ft_strcmp(chunk->length_flag, "l") == 0)
 		deal_with_c2(chunk, arg, count);
