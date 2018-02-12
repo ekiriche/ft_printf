@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/02/12 12:28:32 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/12 12:39:07 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,7 @@ OBJ = $(SRC:.c=.o)
 OBJ_LIB = $(addprefix $(OBJ_PATH), $(SRC_LIB:.c=.o))
 CFLAGS = -g -Wall -Werror -Wextra
 
+.PHONY: all clean fclean re
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OBJ_LIB)
