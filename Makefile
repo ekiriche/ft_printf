@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/02/08 14:15:14 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/12 12:22:16 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,9 +120,9 @@ $(NAME): $(OBJ) $(OBJ_LIB)
 	@gcc $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 clean:
-	@rm -f $(OBJ) $(OBJ_LIB)
+	@/bin/rm -f $(OBJ) $(OBJ_LIB)
 
 fclean: clean
-	@rm -f $(NAME)
+	@/bin/rm -f $(NAME)
 
 re: fclean all
