@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/12 15:51:50 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/12 17:13:18 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,24 @@ void	di_longint_minus(t_format *chunk, long long int num, int *count)
 	}
 }
 
+void	rend_you(t_format *chunk, int num, int *count)
+{
+	while (chunk->field_width - 1 > chunk->precision && chunk->field_width - 1> ft_nbrlen(num))
+	{
+		ft_putchar(' ');
+		*count += 1;
+		chunk->field_width--;
+	}
+	ft_putchar('-');
+	num = -num;
+	ft_putchar('0');
+	*count += 2;
+	ft_putnbr(num);
+	*count += ft_nbrlen(num);
+}
+
 void	step1_di_int(t_format *chunk, int num, int *count)
 {
-	int flag;
-	int flag2;
-
-	flag = 0;
-	flag2 = 0;
 	if (chunk->zero == 1 && (chunk->precision == 0))
 	{
 		negative_number_and_zero(chunk, num, count);
@@ -109,17 +120,17 @@ void	step1_di_int(t_format *chunk, int num, int *count)
 		di_int_minus(chunk, num, count);
 		return ;
 	}
+	if (chunk->precision == ft_nbrlen(num) && num < 0)
+	{
+		rend_you(chunk, num, count);
+		return ;
+	}
 	if (chunk->plus == 1 || (chunk->space == 1 && num >= 0))
 		chunk->field_width--;
 	if (num < 0 && chunk->precision >= ft_nbrlen(num))
 		chunk->field_width--;
-	if (chunk->precision == ft_nbrlen(num) && num < 0)
-		flag = 1;
 	if (chunk->precision < ft_nbrlen(num))
-	{
-		flag2 = 1;
 		chunk->precision = ft_nbrlen(num);
-	}
 	while (chunk->field_width-- > chunk->precision)
 	{
 		*count += 1;
@@ -135,7 +146,7 @@ void	step1_di_int(t_format *chunk, int num, int *count)
 		*count += 1;
 		ft_putchar('+');
 	}
-	if (num < 0 && chunk->precision >= ft_nbrlen(num) && !flag2)
+	if (num < 0 && chunk->precision > ft_nbrlen(num))
 	{
 		ft_putchar('-');
 		num = -num;
@@ -146,8 +157,6 @@ void	step1_di_int(t_format *chunk, int num, int *count)
 		*count += 1;
 		ft_putchar('0');
 	}
-//	if (flag == 1)
-//		ft_putchar('0');
 	ft_putnbr(num);
 	*count += ft_nbrlenlong((long long int)num);
 }
