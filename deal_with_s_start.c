@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 15:34:48 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:34:32 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ void	deal_with_s1(t_format *chunk, va_list arg, int *count)
 void	deal_with_s2(t_format *chunk, va_list arg, int *count)
 {
 	wchar_t	*str;
+	char	*str_null;
 
 	str = va_arg(arg, wchar_t*);
 	if (str == NULL)
 	{
-		step1_string(chunk, "(null)", count);
+		str_null = ft_strdup("(null)");
+		step1_string(chunk, str_null, count);
 		return ;
 	}
 	step1_wstring(chunk, str, count);
@@ -56,7 +58,7 @@ void	count_uni(wchar_t c, int *count)
 			*count += 3;
 		else if (c > 65535)
 			*count += 4;
-		else if (c <= 127)
+		else if (c <= 127 && c >= 0)
 			*count += 1;
 }
 
@@ -136,8 +138,8 @@ void	step1_wstring(t_format *chunk, wchar_t *str, int *count)
 		if (wut < 0)
 			break;
 		ft_putwchar(str[i]);
-		i++;
 		count_uni(str[i], count);
+		i++;
 		wut2 = 0;
 	}
 }
@@ -186,8 +188,8 @@ void	wstring_minus(t_format *chunk, wchar_t *str, int *count)
 		if (wut < 0)
 			break;
 		ft_putwchar(str[i]);
-		i++;
 		count_uni(str[i], count);
+		i++;
 		wut2 = 0;
 	}
 	while (chunk->field_width > 0)
