@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:16:10 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 13:15:38 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 17:25:28 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	step1_di_li(t_format *chunk, long long int num, int *count)
 {
-
 	if (chunk->zero == 1 && chunk->precision == 0)
 	{
 		negative_number_and_zero(chunk, num, count);

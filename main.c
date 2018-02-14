@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 16:37:34 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 17:23:47 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		main(void)
 //	ft_printf("%0 3.2d\n", 1);
 //	printf("%-0 10i\n", -1);
 //	ft_printf("%-0 10i\n", -1);
-	int gg = printf("%5.3ls\n", "sucker");
-	int kk = ft_printf("%5.3ls\n", "sucker");
+	int gg = printf("%d\n", 255);
+	int kk = ft_printf("%d\n", 255);
 	printf("%d %d", gg, kk);
 }
