@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:38:49 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/12 12:32:51 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:47:26 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,31 @@ void	deal_with_c(t_format *chunk, va_list arg, int *count)
 
 void	deal_with_c2(t_format *chunk, va_list arg, int *count)
 {
-	wchar_t c;
+	wchar_t	c;
+	int		len;
 
+	len = 0;
 	c = va_arg(arg, int);
-	counting_char(chunk, count);
-	if (c > 127 && c <= 2047)
-		*count += 1;
-	else if (c > 2047 && c <= 65535)
-		*count += 2;
-	else if (c > 65535)
-		*count += 3;
+	count_uni(c, &len);
+	if (chunk->field_width > len)
+		*count += chunk->field_width;
+	else
+		*count += len;
 	step1_wchar(chunk, c);
 }
 
 void	step1_wchar(t_format *chunk, wchar_t c)
 {
+	int len;
+
+	len = 0;
+	count_uni(c, &len);
 	if (chunk->minus == 1 && chunk->field_width != 0)
 	{
 		wchar_minus(chunk, c);
 		return ;
 	}
-	while (chunk->field_width > 1)
+	while (chunk->field_width > len)
 	{
 		if (chunk->zero == 1)
 			ft_putchar('0');
@@ -55,8 +59,12 @@ void	step1_wchar(t_format *chunk, wchar_t c)
 
 void	wchar_minus(t_format *chunk, wchar_t c)
 {
+	int len;
+
+	len = 0;
+	count_uni(c, &len);
 	ft_putwchar(c);
-	while (chunk->field_width > 1)
+	while (chunk->field_width > len)
 	{
 		ft_putchar(' ');
 		chunk->field_width--;
@@ -71,7 +79,10 @@ void	deal_with_c1(t_format *chunk, va_list arg, int *count)
 		i = '%';
 	else
 		i = va_arg(arg, int);
-	counting_char(chunk, count);
+	if (chunk->field_width > 1)
+		*count += chunk->field_width;
+	else
+		*count += 1;
 	step1_char(chunk, i);
 }
 
@@ -79,8 +90,6 @@ void	counting_char(t_format *chunk, int *count)
 {
 	if (chunk->field_width > 1)
 		*count += chunk->field_width;
-	else
-		*count += 1;
 }
 
 void	step1_char(t_format *chunk, char c)

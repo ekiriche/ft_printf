@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 12:18:16 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:40:17 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
-void	rend_you(t_format *chunk, int num, int *count);
+void	rend_you(t_format *chunk, long long int num, int *count);
 void	kill_me(t_format *chunk, char *str, int *count);
 void	count_uni(wchar_t c, int *count);
 void	holy_crap(t_format *chunk, int *count);

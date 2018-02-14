@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/12 14:11:24 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 15:39:26 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,9 @@ void	counting_xX(t_format *chunk, char *str, int *count)
 
 void	step1_xX_int(t_format *chunk, char *str, int *count)
 {
+	int flag;
+
+	flag = 0;
 	if (ft_find_point0(chunk) && ft_strcmp(str, "0") == 0)
 	{
 		case_point0(chunk, count);
@@ -228,16 +231,19 @@ void	step1_xX_int(t_format *chunk, char *str, int *count)
 	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 	(chunk->conversion == 'x' || chunk->conversion == 'X'))
 		chunk->field_width -= 2;
-	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
-	chunk->conversion == 'o')
-		chunk->field_width--;
 	if (chunk->zero == 1 && chunk->precision == 0 &&
 			chunk->field_width > (int)ft_strlen(str))
 	{
 		chunk->precision = chunk->field_width;
 		chunk->field_width = 0;
 	}
-	if (chunk->precision < (int)ft_strlen(str))
+	if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
+			chunk->conversion == 'o')
+	{
+		chunk->precision--;
+		chunk->field_width--;
+	}
+	if (chunk->precision <= (int)ft_strlen(str))
 		chunk->precision = (int)ft_strlen(str);
 	while (chunk->field_width-- > chunk->precision)
 	{
@@ -259,7 +265,6 @@ void	step1_xX_int(t_format *chunk, char *str, int *count)
 	else if (chunk->hash == 1 && ft_strcmp(str, "0") != 0 &&
 			chunk->conversion == 'o')
 	{
-		chunk->precision--;
 		ft_putchar('0');
 		*count += 1;
 	}
@@ -296,6 +301,7 @@ void	xX_int_minus(t_format *chunk, char *str, int *count)
 			chunk->conversion == 'o')
 	{
 		*count += 1;
+		chunk->precision--;
 		ft_putchar('0');
 	}
 	while (chunk->precision > (int)ft_strlen(str))
