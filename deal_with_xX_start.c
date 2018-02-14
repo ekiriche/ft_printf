@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:53:06 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 15:39:26 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:56:52 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ void	deal_with_xX1(t_format *chunk, va_list arg, int *count)
 
 	i = va_arg(arg, unsigned int);
 	if (chunk->conversion == 'x')
-		ans = ft_strdup(ft_dectohexsmall((unsigned long long int)i));
+		ans = ft_dectohexsmall((unsigned long long int)i);
 	else if (chunk->conversion == 'X')
-		ans = ft_strdup(ft_dectohex((unsigned long long int)i));
+		ans = ft_dectohex((unsigned long long int)i);
 	else if (chunk->conversion == 'u')
 		ans = ft_itoa_unsign((unsigned long long int)i);
 	else
 		ans = ft_dectooct((unsigned long long int)i);
-//	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans, count);
 	ft_memdel((void**)&ans);
 }
@@ -58,7 +57,7 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 	if (chunk->conversion == 'x' || chunk->conversion == 'p')
 	{
 		if (chunk->conversion == 'x')
-			ans = ft_strdup(ft_dectohexsmall(i));
+			ans = ft_dectohexsmall(i);
 		else
 		{
 			if (i == 0)
@@ -70,46 +69,32 @@ void	deal_with_xX2(t_format *chunk, va_list arg, int *count)
 				chunk->hash = 0;
 				chunk->conversion = 'x';
 				kill_me(chunk, ans, count);
+				ft_memdel((void**)&ans);
 				return ;
 			}
 			else
 			{
-				ans = ft_strdup(ft_dectohexsmall(i));
+				ans = ft_dectohexsmall(i);
 				chunk->conversion = 'x';
 				chunk->hash = 1;
-//				if ((size_t)chunk->field_width - 1 == ft_strlen(ans))
-//					*count += 1;
-//				else if ((size_t)chunk->field_width - 1 < ft_strlen(ans))
-//					*count += 2;
 			}
 		}
 	}
 	else if (chunk->conversion == 'X')
-		ans = ft_strdup(ft_dectohex(i));
+		ans = ft_dectohex(i);
 	else if (chunk->conversion == 'u')
 		ans = ft_itoa_unsign(i);
 	else
 		ans = ft_dectooct(i);
-//	counting_xX(chunk, ans, count);
 	step1_xX_int(chunk, ans, count);
 	ft_memdel((void**)&ans);
 }
-
-//void	rend_me(t_format *chunk, char *str, int *count)
-//{
-//
-//}
 
 void	kill_me(t_format *chunk, char *str, int *count)
 {
 	int lul;
 
 	lul = (int)ft_strlen(str);
-//	if (chunk->zero == 1 && chunk->minus == 0)
-//	{
-//		rend_me(chunk, str, count);
-//		return ;
-//	}
 	if (chunk->zero == 1 && chunk->minus == 0)
 		chunk->precision = chunk->field_width - lul + 1;
 	if (chunk->minus == 0)

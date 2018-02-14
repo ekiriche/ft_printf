@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/11 18:59:38 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 19:48:47 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		ft_printf(const char *fmt, ...)
 			if (pepePls(chunk->format[size_of_chunk(fmt) - 1]))
 			{
 				trouble_maker(chunk, &count);
+				ft_memdel((void**)&chunk->format);
+				ft_memdel((void**)&chunk);
 				return (count);
 			}
 			else
@@ -47,7 +49,6 @@ int		ft_printf(const char *fmt, ...)
 			}
 			ft_memdel((void**)&chunk->format);
 			ft_memdel((void**)&chunk->length_flag);
-
 		}
 		else
 			while (*fmt != '\0' && *fmt != '%')
@@ -57,6 +58,7 @@ int		ft_printf(const char *fmt, ...)
 				count++;
 			}
 	}
+	ft_memdel((void**)&chunk);
 	va_end(arg);
 	return (count);
 }
@@ -219,21 +221,22 @@ void	look_for_length_flag(t_format *chunk)
 void	look_for_field_width(t_format *chunk)
 {
 	char	*ptr;
-	char	*lul;
+	int		i;
 
+	i = 0;
 	ptr = ft_strdup(chunk->format);
-	lul = ptr;
-	while (*ptr < '1' || *ptr > '9')
+	while (ptr[i] < '1' || ptr[i] > '9')
 	{
-		if (!(pepePls(*ptr)) || *ptr == '.')
+		if (!(pepePls(ptr[i])) || ptr[i] == '.')
 		{
 			chunk->field_width = 0;
+			ft_memdel((void**)&ptr);
 			return ;
 		}
-		ptr++;
+		i++;
 	}
-	chunk->field_width = ft_atoi(ptr);
-	ft_memdel((void**)&lul);
+	chunk->field_width = ft_atoi(&ptr[i]);
+	ft_memdel((void**)&ptr);
 }
 
 void	look_for_conversion(t_format *chunk)
@@ -248,6 +251,8 @@ void	look_for_conversion(t_format *chunk)
 			chunk->format[i] == 'U')
 	{
 		chunk->conversion = ft_tolower(chunk->format[i]);
+		if (chunk->length_flag != NULL)
+			ft_memdel((void**)&chunk->length_flag);
 		chunk->length_flag = ft_strdup("l");
 	}
 	else if (chunk->format[i] == '%')
@@ -268,6 +273,7 @@ void	look_for_precision(t_format *chunk)
 	if (!(pepePls(*ptr)))
 	{
 		chunk->precision = 0;
+		ft_memdel((void**)&lul);
 		return ;
 	}
 	ptr++;

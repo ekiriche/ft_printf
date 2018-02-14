@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 19:00:34 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/12 15:12:46 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:06:37 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	deal_with_di(t_format *chunk, va_list arg, int *count)
 void	deal_with_di1(t_format *chunk, va_list arg, int *count)
 {
 	int	i;
-	//char	*str;
 
 	i = va_arg(arg, int);
 	if (ft_find_point0(chunk) && i == 0 && chunk->hash == 0)
@@ -47,15 +46,11 @@ void	deal_with_di2(t_format *chunk, va_list arg, int *count)
 	long long int	li;
 
 	li = va_arg(arg, long long int);
-//	counting(chunk, li, count);
 	if (ft_find_point0(chunk) && li == 0)
 	{
 		case_point0(chunk, count);
 		return ;
 	}
-//	if (li < 0 && chunk->precision > chunk->field_width &&
-//			chunk->precision > ft_nbrlenlong(li))
-//		*count += 1;
 	step1_di_li(chunk, li, count);
 }
 
@@ -64,15 +59,11 @@ void	deal_with_di3(t_format *chunk, va_list arg, int *count)
 	short int	i;
 
 	i = va_arg(arg, int);
-//	counting(chunk, (long long int)i, count);
 	if (ft_find_point0(chunk) && i == 0)
 	{
 		case_point0(chunk, count);
 		return ;
 	}
-//	if (i < 0 && chunk->precision > chunk->field_width &&
-//			chunk->precision >ft_nbrlen(i))
-//		*count += 1;
 	step1_di_int(chunk, i, count);
 }
 

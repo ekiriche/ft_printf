@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 16:34:32 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/14 18:12:49 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	deal_with_s1(t_format *chunk, va_list arg, int *count)
 		str = ft_strdup(lul);
 	step1_string(chunk, str, count);
 	ft_memdel((void**)&str);
-//	ft_memdel((void**)&lul);
 }
 
 void	deal_with_s2(t_format *chunk, va_list arg, int *count)
@@ -45,6 +44,7 @@ void	deal_with_s2(t_format *chunk, va_list arg, int *count)
 	{
 		str_null = ft_strdup("(null)");
 		step1_string(chunk, str_null, count);
+		ft_memdel((void**)&str_null);
 		return ;
 	}
 	step1_wstring(chunk, str, count);

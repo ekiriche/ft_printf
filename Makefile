@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/02/14 17:33:32 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/14 18:19:11 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,7 @@ SRC = deal_with_d.c \
 		deal_with_xX_start.c \
 
 OBJ_PATH = ./libft/
-INCLUDE = -I ./ -I ./libft
+INCLUDE = -I ./libft
 OBJ = $(SRC:.c=.o)
 OBJ_LIB = $(addprefix $(OBJ_PATH), $(SRC_LIB:.c=.o))
 CFLAGS = -g -Wall -Werror -Wextra
