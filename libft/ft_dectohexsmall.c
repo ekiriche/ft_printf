@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:00:27 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/03 13:05:38 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:11:07 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_dectohexsmall(unsigned long long int n)
 {
-	char	*ans;
+	char					*ans;
 	unsigned long long int	i;
 	unsigned long long int	temp;
 

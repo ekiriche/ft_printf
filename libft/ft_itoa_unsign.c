@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/03 14:36:15 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/12 15:04:28 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:10:28 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char							*ft_itoa_unsign(unsigned long long int n)
 	char						*ans;
 	unsigned long long int		i;
 	unsigned long long int		lul;
-	
+
 	i = ft_numlen_unsign(n);
 	lul = i;
 	ans = (char*)malloc(sizeof(char) * (ft_numlen_unsign(n) + 1));

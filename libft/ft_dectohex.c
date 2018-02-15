@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 19:14:32 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 18:52:22 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:10:49 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_dectohex(unsigned long long int n)
 {
-	char	*ans;
+	char					*ans;
 	unsigned long long int	i;
 	unsigned long long int	temp;
 

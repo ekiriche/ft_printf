@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 15:38:49 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 18:05:52 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:49:50 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,38 +84,4 @@ void	deal_with_c1(t_format *chunk, va_list arg, int *count)
 	else
 		*count += 1;
 	step1_char(chunk, i);
-}
-
-void	counting_char(t_format *chunk, int *count)
-{
-	if (chunk->field_width > 1)
-		*count += chunk->field_width;
-}
-
-void	step1_char(t_format *chunk, char c)
-{
-	if (chunk->minus == 1 && chunk->field_width != 0)
-	{
-		char_minus(chunk, c);
-		return ;
-	}
-	while (chunk->field_width > 1)
-	{
-		if (chunk->zero == 1)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		chunk->field_width--;
-	}
-	ft_putchar(c);
-}
-
-void	char_minus(t_format *chunk, char c)
-{
-	ft_putchar(c);
-	while (chunk->field_width > 1)
-	{
-		ft_putchar(' ');
-		chunk->field_width--;
-	}
 }

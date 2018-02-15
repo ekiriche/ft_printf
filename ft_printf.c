@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 13:41:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 19:48:47 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:30:44 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_printf(const char *fmt, ...)
 			fmt++;
 			chunk->len_format = size_of_chunk(fmt);
 			chunk->format = ft_strsub(fmt, 0, chunk->len_format);
-			if (pepePls(chunk->format[size_of_chunk(fmt) - 1]))
+			if (pepe_pls(chunk->format[size_of_chunk(fmt) - 1]))
 			{
 				trouble_maker(chunk, &count);
 				ft_memdel((void**)&chunk->format);
@@ -63,7 +63,7 @@ int		ft_printf(const char *fmt, ...)
 	return (count);
 }
 
-int		pepePls(char c)
+int		pepe_pls(char c)
 {
 	if (c == 's' || c == 'S' || c == 'p' || c == 'd' || c == 'D' || c == 'i'
 			|| c == 'o' || c == 'O' || c == 'u' || c == 'U' || c == 'x'
@@ -77,7 +77,7 @@ void	minus_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (chunk->format[i] && pepePls(chunk->format[i]))
+	while (chunk->format[i] && pepe_pls(chunk->format[i]))
 	{
 		if (chunk->format[i] == '-')
 		{
@@ -94,7 +94,7 @@ void	plus_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (pepePls(chunk->format[i]))
+	while (pepe_pls(chunk->format[i]))
 	{
 		if (chunk->format[i] == '+')
 		{
@@ -111,7 +111,7 @@ void	space_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (pepePls(chunk->format[i]))
+	while (pepe_pls(chunk->format[i]))
 	{
 		if (chunk->format[i] == ' ')
 		{
@@ -128,7 +128,7 @@ void	hash_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (pepePls(chunk->format[i]))
+	while (pepe_pls(chunk->format[i]))
 	{
 		if (chunk->format[i] == '#')
 		{
@@ -145,7 +145,7 @@ void	zero_present(t_format *chunk)
 	int i;
 
 	i = 0;
-	while (chunk->format[i] && pepePls(chunk->format[i]))
+	while (chunk->format[i] && pepe_pls(chunk->format[i]))
 	{
 		if (chunk->format[i] == '.')
 		{
@@ -157,7 +157,8 @@ void	zero_present(t_format *chunk)
 			chunk->zero = 1;
 			return ;
 		}
-		else if (chunk->format[i] == '0' && (chunk->format[i - 1] < '0' || chunk->format[i - 1] > '9'))
+		else if (chunk->format[i] == '0' &&
+				(chunk->format[i - 1] < '0' || chunk->format[i - 1] > '9'))
 		{
 			chunk->zero = 1;
 			return ;
@@ -178,16 +179,6 @@ void	do_smth(t_format *chunk)
 	look_for_conversion(chunk);
 	look_for_precision(chunk);
 	look_for_field_width(chunk);
-	/*	printf("Minus: %i\n", chunk->minus);
-		printf("Space: %i\n", chunk->space);
-		printf("Plus: %i\n", chunk->plus);
-		printf("Zero: %i\n", chunk->zero);
-		printf("Hash: %i\n", chunk->hash);
-		printf("Conversion: %c\n", chunk->conversion);
-		printf("Precision: %i\n", chunk->precision);
-		printf("Field-width: %i\n", chunk->field_width);
-		printf("Length flag: %s\n", chunk->length_flag);
-		*/	
 }
 
 void	look_for_length_flag(t_format *chunk)
@@ -227,7 +218,7 @@ void	look_for_field_width(t_format *chunk)
 	ptr = ft_strdup(chunk->format);
 	while (ptr[i] < '1' || ptr[i] > '9')
 	{
-		if (!(pepePls(ptr[i])) || ptr[i] == '.')
+		if (!(pepe_pls(ptr[i])) || ptr[i] == '.')
 		{
 			chunk->field_width = 0;
 			ft_memdel((void**)&ptr);
@@ -244,7 +235,7 @@ void	look_for_conversion(t_format *chunk)
 	int	i;
 
 	i = 0;
-	while (pepePls(chunk->format[i]))
+	while (pepe_pls(chunk->format[i]))
 		i++;
 	if (chunk->format[i] == 'S' || chunk->format[i] == 'C' ||
 			chunk->format[i] == 'D' || chunk->format[i] == 'O' ||
@@ -268,9 +259,9 @@ void	look_for_precision(t_format *chunk)
 
 	ptr = ft_strdup(chunk->format);
 	lul = ptr;
-	while (*ptr != '.' && pepePls(*ptr))
+	while (*ptr != '.' && pepe_pls(*ptr))
 		ptr++;
-	if (!(pepePls(*ptr)))
+	if (!(pepe_pls(*ptr)))
 	{
 		chunk->precision = 0;
 		ft_memdel((void**)&lul);
@@ -286,7 +277,7 @@ int		size_of_chunk(const char *str)
 	int	len;
 
 	len = 0;
-	while (pepePls(*str) && *str != '\0')
+	while (pepe_pls(*str) && *str != '\0')
 	{
 		len++;
 		str++;
@@ -294,39 +285,3 @@ int		size_of_chunk(const char *str)
 	len++;
 	return (len);
 }
-
-/*int		main()
-  {
-  unsigned char lul;
-  lul = -99;
-//	ft_printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
-//	printf("%smamamia %c%c%s%x\n", "rari", 'w', 'a', "tratata", 2147);
-//	printf("%D", 0xa);
-//	ft_printf("%%\n");
-//	printf("%hhi\n", 214);
-//	printf("%hd%d", 127, 7500);
-//printf("%#X", 127);
-//	ft_printf("%i %d\n", 033, 033);
-//	printf("%i %d\n", 033, 033);
-//	ft_printf("%x %X\n", 214748364, 214748364);
-//	printf("%x %X\n", 214748364, 214748364);
-//		printf("|%- 10.4d|\n", 42);
-//	printf("|% 010.3hhd|\n", c);
-//	printf("% 10d10", 20);
-//	printf("%.*s", 3, "abcdef");
-//ft_printf("%- 322.10d\n%s\n123", "asd");
-//	printf("%+010d", 12345);
-//ft_printf("%+10.4lld%s%hd", "ads");
-//	ft_printf("%+-# 010.43lld", 123);
-//ft_printf("%.10d\n", 123);
-//	printf("%.10d\n", 123);
-//			printf("system: %+10.7lld\n", 9223372036854775806);
-//			ft_printf("mine  : %+10.7lld\n", 9223372036854775807);
-//	printf("%hhu", lul);
-//	ft_printf("|%- +010.0d|\n", 0);
-//	printf("|%- +010.0d|\n", 0);
-long long int y = -9223372036854775807;
-size_t	x = 12345;
-ft_printf("%zd\n", x);
-printf("%zd\n", x);
-} */

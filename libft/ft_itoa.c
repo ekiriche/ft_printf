@@ -6,7 +6,7 @@
 /*   By: dpolosuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/05 13:09:51 by dpolosuk          #+#    #+#             */
-/*   Updated: 2018/02/12 15:04:53 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:09:36 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char					*ft_less(long long int n, char *res)
 	return (res);
 }
 
-static char		*ft_else(long long int n, char *res)
+static char					*ft_else(long long int n, char *res)
 {
 	long long int		i;
 	long long int		len;
@@ -56,7 +56,7 @@ static char		*ft_else(long long int n, char *res)
 	return (res);
 }
 
-static char		*ft_kostyl(char *res)
+static char					*ft_kostyl(char *res)
 {
 	res[0] = '-';
 	res[1] = '2';
@@ -73,7 +73,7 @@ static char		*ft_kostyl(char *res)
 	return (res);
 }
 
-char			*ft_itoa(long long int n)
+char						*ft_itoa(long long int n)
 {
 	long long int		len;
 	char				*res;

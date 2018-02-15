@@ -6,7 +6,7 @@
 /*   By: dpolosuk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 12:47:43 by dpolosuk          #+#    #+#             */
-/*   Updated: 2017/11/17 14:32:07 by dpolosuk         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:08:41 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_lstrev(t_list **alst)
 {
-	t_list    *prev;
-	t_list    *cur;
-	t_list    *next;
+	t_list	*prev;
+	t_list	*cur;
+	t_list	*next;
 
 	if (!(*alst) || !alst)
 		return ;

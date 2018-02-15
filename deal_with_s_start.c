@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 18:12:49 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 13:48:11 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,17 +225,6 @@ size_t	ft_wstrlen(wchar_t *str)
 	return (len);
 }
 
-void	counting_string(t_format *chunk, char *str, int *count)
-{
-	if ((unsigned long int)chunk->precision < ft_strlen(str) &&
-			chunk->precision != 0)
-		ft_strnclr(str, chunk->precision);
-	if ((unsigned long int)chunk->field_width > ft_strlen(str) ||
-			ft_find_point0(chunk))
-		*count += chunk->field_width;
-	else
-		*count += ft_strlen(str);
-}
 
 void	step1_string(t_format *chunk, char *str, int *count)
 {

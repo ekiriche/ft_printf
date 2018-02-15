@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:01:11 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 20:01:21 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:43:38 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ void	error_handler(t_format *chunk)
 		chunk->plus = 0;
 		chunk->space = 0;
 	}
-//	if (chunk->conversion == 's')
-//	{
-//		chunk->zero = 0;
-//		chunk->plus = 0;
-//		chunk->space = 0;
-//		chunk->hash = 0;
-//	}
-//	if (chunk->conversion == 'c')
-//	{
-//		chunk->precision = 0;
-//		chunk->zero = 0;
-//		chunk->space = 0;
-//		chunk->hash = 0;
-//		chunk->plus = 0;
-//	}
 	if (chunk->space == 1 && chunk->conversion == 'o')
 		chunk->space = 0;
 	if (chunk->plus == 1 && chunk->conversion == 'o')
@@ -56,12 +41,10 @@ void	trouble_maker(t_format *chunk, int *count)
 		if (chunk->format[end - 1] != 'l' && chunk->format[end - 1] != 'h'
 		&& chunk->format[end - 1] != 'j' && chunk->format[end - 1] != 'z' &&
 		((chunk->format[end - 1] >= 'a' && chunk->format[end - 1] <= 'z') ||
-		 (chunk->format[end - 1] >= 'A' && chunk->format[end - 1] <= 'Z')))
+		(chunk->format[end - 1] >= 'A' && chunk->format[end - 1] <= 'Z')))
 		{
-			look_for_field_width(chunk);
 			*count += chunk->field_width;
-			zero_present(chunk);
-			minus_present(chunk);
+			norm_trouble_maker(chunk);
 			step1_char(chunk, chunk->format[end - 1]);
 			break ;
 		}
@@ -73,4 +56,11 @@ void	trouble_maker(t_format *chunk, int *count)
 		*count += 1;
 		end++;
 	}
+}
+
+void	norm_trouble_maker(t_format *chunk)
+{
+	zero_present(chunk);
+	minus_present(chunk);
+	look_for_field_width(chunk);
 }

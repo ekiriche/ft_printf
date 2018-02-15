@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 19:15:26 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 18:09:29 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:38:13 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,51 +57,11 @@ int		ft_find_point0(t_format *chunk)
 	while (chunk->format[i + 1] != '\0')
 	{
 		if (chunk->format[i] == '.' && (chunk->format[i + 1] == '0' ||
-					!pepePls(chunk->format[i + 1])))
+					!pepe_pls(chunk->format[i + 1])))
 			return (1);
 		i++;
 	}
 	return (0);
-}
-
-void	case_point0(t_format *chunk, int *count)
-{
-	if (chunk->plus == 1 || chunk->space == 1)
-		chunk->field_width--;
-	while (chunk->field_width-- > chunk->precision)
-	{
-		*count += 1;
-		ft_putchar(' ');
-	}
-	if (chunk->space == 1)
-	{
-		*count += 1;
-		ft_putchar(' ');
-	}
-	if (chunk->conversion == 'o' && chunk->hash == 1)
-	{
-		*count += 1;
-		ft_putchar('0');
-	}
-
-}
-
-unsigned long long int	ft_dectooctlong(unsigned long long int num)
-{
-	unsigned long long int	ans;
-	unsigned long long int	temp;
-	unsigned long long int	i;
-
-	i = 1;
-	ans = 0;
-	while (num != 0)
-	{
-		temp = num % 8;
-		num /= 8;
-		ans += temp * i;
-		i *= 10;
-	}
-	return (ans);
 }
 
 void	ft_putwchar(wchar_t wc)
@@ -135,17 +95,4 @@ void	ft_putwstring(wchar_t *str)
 		ft_putwchar(*str);
 		str += 1;
 	}
-}
-
-wchar_t	*ft_wstrdup(wchar_t *src)
-{
-	wchar_t	*cp;
-
-	cp = (wchar_t*)malloc(sizeof(wchar_t) * ft_strlen((char*)src) + 1);
-	if (cp == NULL)
-		return (NULL);
-	if (src == NULL)
-		return (NULL);
-	ft_strcpy((char*)cp, (char*)src);
-	return (cp);
 }

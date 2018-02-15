@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:13:31 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 18:09:01 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:34:48 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	ultimate_handler(t_format *chunk, va_list arg, int *count)
 	if (chunk->conversion == 'x' || chunk->conversion == 'X' ||
 			chunk->conversion == 'u' || chunk->conversion == 'o' ||
 			chunk->conversion == 'p')
-		deal_with_xX(chunk, arg, count);
+		deal_with_x(chunk, arg, count);
 }

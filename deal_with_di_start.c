@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 19:00:34 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 18:06:37 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:32:11 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	deal_with_di2(t_format *chunk, va_list arg, int *count)
 		case_point0(chunk, count);
 		return ;
 	}
-	step1_di_li(chunk, li, count);
+	step1_di_int(chunk, li, count);
 }
 
 void	deal_with_di3(t_format *chunk, va_list arg, int *count)

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/14 19:48:49 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 12:43:18 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		main(void)
 	//	ft_printf("%.5s\n", NULL);
 	//	printf("t:%d\n", printf("{%05.Z}", 123));
 	//	printf("m:%d\n", ft_printf("{%05.Z}", 123));
-	//	printf("% 10Zoooo");
+	ft_printf("% 10Z");
 	//	ft_printf("% Zoooo");
 	//	ft_printf("%03.2d\n", -1);
 	//	printf("%C\n", L'ø');
@@ -99,7 +99,7 @@ int		main(void)
 //	ft_printf("%X\n", 505);
 //	ft_printf("%p\n", &ft_printf);
 //	ft_printf("%20.15d\n", 54321);
-	ft_printf("%U\n", 4294967295);
-	ft_printf("%S\n", L"ݗݜशব");
-	ft_printf("%C\n", 15000);
+//	ft_printf("%U\n", 4294967295);
+//	ft_printf("%S\n", L"ݗݜशব");
+//	ft_printf("%C\n", 15000);
 }
