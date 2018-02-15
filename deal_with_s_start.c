@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 17:19:50 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 13:48:11 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:46:47 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	deal_with_s(t_format *chunk, va_list arg, int *count)
 	if (ft_strcmp(chunk->length_flag, "none") == 0)
 		deal_with_s1(chunk, arg, count);
 	else if (ft_strcmp(chunk->length_flag, "l") == 0)
-			deal_with_s2(chunk, arg, count);
+		deal_with_s2(chunk, arg, count);
 }
 
 void	deal_with_s1(t_format *chunk, va_list arg, int *count)
@@ -52,14 +52,14 @@ void	deal_with_s2(t_format *chunk, va_list arg, int *count)
 
 void	count_uni(wchar_t c, int *count)
 {
-		if (c > 127 && c <= 2047)
-			*count += 2;
-		else if (c > 2047 && c <= 65535)
-			*count += 3;
-		else if (c > 65535)
-			*count += 4;
-		else if (c <= 127 && c >= 0)
-			*count += 1;
+	if (c > 127 && c <= 2047)
+		*count += 2;
+	else if (c > 2047 && c <= 65535)
+		*count += 3;
+	else if (c > 65535)
+		*count += 4;
+	else if (c <= 127 && c >= 0)
+		*count += 1;
 }
 
 void	holy_crap(t_format *chunk, int *count)
@@ -77,9 +77,7 @@ void	holy_crap(t_format *chunk, int *count)
 
 void	step1_wstring(t_format *chunk, wchar_t *str, int *count)
 {
-	int	i;
-	int	wut;
-	int	wut2;
+	t_wut	*norm;
 
 	if (ft_find_point0(chunk))
 	{
@@ -91,64 +89,72 @@ void	step1_wstring(t_format *chunk, wchar_t *str, int *count)
 		wstring_minus(chunk, str, count);
 		return ;
 	}
-	wut = 0;
-	i = 0;
-	if (chunk->precision != 0)
-	{	
-		while (chunk->precision > 0 && str[i])
-		{
-			wut2 = 0;
-			count_uni(str[i], &wut);
-			count_uni(str[i], &wut2);
-			if (chunk->precision - wut < 0)
-			{
-				wut -= wut2;
-				break ;
-			}
-			i++;
-		}
-		chunk->field_width -= wut;
-	}
-	if (wut == 0)
-		chunk->field_width -= ft_wstrlen(str);
-	while (chunk->field_width > 0)
-	{
-		*count += 1;
-		if (chunk->zero == 1)
-			ft_putchar('0');
-		else
-			ft_putchar(' ');
-		chunk->field_width--;
-	}
-	i = 0;
-	wut2 = 0;
-	if (wut == 0)
+	norm = malloc(sizeof(t_wut));
+	norm->wut1 = 0;
+	norm->i = 0;
+	norm_wstring(chunk, str, norm, count);
+	norm->i = 0;
+	norm->wut2 = 0;
+	norm_wstring2(str, count, norm);
+	ft_memdel((void**)&norm);
+}
+
+void	norm_wstring2(wchar_t *str, int *count, t_wut *norm)
+{
+	if (norm->wut1 == 0)
 	{
 		ft_putwstring(str);
-		while (str[i])
+		while (str[norm->i])
 		{
-			count_uni(str[i], count);
-			i++;
+			count_uni(str[norm->i], count);
+			norm->i++;
 		}
 	}
-	while (wut > 0)
+	while (norm->wut1 > 0)
 	{
-		count_uni(str[i], &wut2);
-		wut -= wut2;
-		if (wut < 0)
+		count_uni(str[norm->i], &norm->wut2);
+		norm->wut1 -= norm->wut2;
+		if (norm->wut1 < 0)
 			break;
-		ft_putwchar(str[i]);
-		count_uni(str[i], count);
-		i++;
-		wut2 = 0;
+		ft_putwchar(str[norm->i]);
+		count_uni(str[norm->i], count);
+		norm->i++;
+		norm->wut2 = 0;
 	}
+}
+
+void	norm_wstring(t_format *chunk, wchar_t *str, t_wut *norm, int *count)
+{
+	if (chunk->precision != 0)
+	{	
+		while (chunk->precision > 0 && str[norm->i])
+		{
+			norm->wut2 = 0;
+			count_uni(str[norm->i], &norm->wut1);
+			count_uni(str[norm->i], &norm->wut2);
+			if (chunk->precision - norm->wut1 < 0)
+			{
+				norm->wut1 -= norm->wut2;
+				break ;
+			}
+			norm->i++;
+		}
+		chunk->field_width -= norm->wut1;
+	}
+	if (norm->wut1 == 0)
+		chunk->field_width -= ft_wstrlen(str);
+	while (chunk->field_width-- > 0)
+		if (chunk->zero == 1)
+			count_plus_char('0', count);
+		else
+			count_plus_char(' ', count);
 }
 
 void	wstring_minus(t_format *chunk, wchar_t *str, int *count)
 {
-	int	i;
-	int	wut;
-	int	wut2;
+	int i;
+	int wut;
+	int wut2;
 
 	wut = 0;
 	i = 0;
@@ -236,26 +242,18 @@ void	step1_string(t_format *chunk, char *str, int *count)
 	if ((unsigned long int)chunk->precision < ft_strlen(str) &&
 			chunk->precision != 0)
 		ft_strnclr(str, chunk->precision);
-	while ((unsigned long int)chunk->field_width > ft_strlen(str) &&
+	while ((unsigned long int)chunk->field_width-- > ft_strlen(str) &&
 			!ft_find_point0(chunk))
-	{
 		if (chunk->zero == 1)
-			ft_putchar('0');
+			count_plus_char('0', count);
 		else
-			ft_putchar(' ');
-		*count += 1;
-		chunk->field_width--;
-	}
+			count_plus_char(' ', count);
 	if (ft_find_point0(chunk))
-		while (chunk->field_width > 0)
-		{
+		while (chunk->field_width-- > 0)
 			if (chunk->zero == 1)
-				ft_putchar('0');
+				count_plus_char('0', count);
 			else
-				ft_putchar(' ');
-			*count += 1;
-			chunk->field_width--;
-		}
+				count_plus_char(' ', count);
 	else
 	{
 		*count += (int)ft_strlen(str);

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 16:28:34 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 17:49:16 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ typedef struct		s_format
 	int				hash;
 }					t_format;
 
+typedef struct		s_wut
+{
+	int				wut1;
+	int				wut2;
+	int				i;
+}					t_wut;
+
+void				norm_wstring2(wchar_t *str, int *count, t_wut *norm);
+void				norm_wstring(t_format *chunk, wchar_t *str, t_wut *norm,
+					int *count);
 void				norm_printf2(const char *fmt, t_format *chunk);
 void				norm_trouble_maker2(t_format *chunk, int *count, int end);
 void				norm_printf(const char *fmt, int *count, t_format *chunk,
