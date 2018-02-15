@@ -6,7 +6,7 @@
 #    By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 13:06:57 by ekiriche          #+#    #+#              #
-#    Updated: 2018/02/15 16:26:54 by ekiriche         ###   ########.fr        #
+#    Updated: 2018/02/15 18:05:39 by ekiriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,8 @@ SRC = deal_with_d.c \
 		deal_with_di_start.c \
 		deal_with_c_start.c \
 		deal_with_s_start.c \
+		deal_with_s_1.c \
+		deal_with_s_2.c \
 		deal_with_x_start.c \
 		deal_with_x_2.c \
 		deal_with_x_3.c \

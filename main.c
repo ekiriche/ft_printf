@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 13:11:47 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 17:49:20 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 18:13:24 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,18 +88,20 @@ int		main(void)
 	//	int gg = printf("%s\n", 255);
 	//	int kk = ft_printf("%C\n", L'å');
 	//	printf("%d", kk);
-	ft_printf("\n");
-	ft_printf("%%\n");
-	ft_printf("%d\n", 42);
-	ft_printf("%d%d\n", 42, 41);
-	ft_printf("%d%d%d\n", 42, 43, 44);
-	ft_printf("%ld\n", 2147483647);
-	ft_printf("%lld\n", 9223372036854775807);
-	ft_printf("%x\n", 505);
-	ft_printf("%X\n", 505);
-	ft_printf("%p\n", &ft_printf);
-	ft_printf("%20.15d\n", 54321);
-	ft_printf("%U\n", 4294967295);
-	ft_printf("%S\n", L"ݗݜशব");
-	ft_printf("%C\n", 15000);
+//	ft_printf("\n");
+//	ft_printf("%%\n");
+//	ft_printf("%d\n", 42);
+//	ft_printf("%d%d\n", 42, 41);
+//	ft_printf("%d%d%d\n", 42, 43, 44);
+//	ft_printf("%ld\n", 2147483647);
+//	ft_printf("%lld\n", 9223372036854775807);
+//	ft_printf("%x\n", 505);
+//	ft_printf("%X\n", 505);
+//	ft_printf("%p\n", &ft_printf);
+//	ft_printf("%20.15d\n", 54321);
+//	ft_printf("%U\n", 4294967295);
+//	ft_printf("%S\n", L"ݗݜशব");
+//	ft_printf("%C\n", 15000);
+	printf("%4.s\n", "42");
+	ft_printf("%4.s\n", "42");
 }

@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 11:38:17 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 17:49:16 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 18:01:23 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_wut
 	int				i;
 }					t_wut;
 
+void				norm_wstring3(t_format *chunk, wchar_t *str, t_wut *norm);
 void				norm_wstring2(wchar_t *str, int *count, t_wut *norm);
 void				norm_wstring(t_format *chunk, wchar_t *str, t_wut *norm,
 					int *count);
