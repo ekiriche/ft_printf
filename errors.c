@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:01:11 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 15:51:05 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 16:31:37 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	norm_trouble_maker2(t_format *chunk, int *count, int end)
 		*count += 1;
 		end++;
 	}
-	//ft_memdel((void**)&chunk->format);
-	//ft_memdel((void**)&chunk);
 }
 
 void	norm_trouble_maker(t_format *chunk)
