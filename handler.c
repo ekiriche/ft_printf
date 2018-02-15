@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:13:31 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 12:34:48 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:25:15 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ultimate_handler(t_format *chunk, va_list arg, int *count)
 {
+	do_smth(chunk);
 	error_handler(chunk);
 	if (chunk->conversion == 'd' || chunk->conversion == 'i')
 		deal_with_di(chunk, arg, count);

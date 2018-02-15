@@ -6,7 +6,7 @@
 /*   By: ekiriche <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:01:11 by ekiriche          #+#    #+#             */
-/*   Updated: 2018/02/15 12:43:38 by ekiriche         ###   ########.fr       */
+/*   Updated: 2018/02/15 15:51:05 by ekiriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,19 @@ void	trouble_maker(t_format *chunk, int *count)
 		}
 		end--;
 	}
+	norm_trouble_maker2(chunk, count, end);
+}
+
+void	norm_trouble_maker2(t_format *chunk, int *count, int end)
+{
 	while (end < (int)ft_strlen(chunk->format))
 	{
 		ft_putchar(chunk->format[end]);
 		*count += 1;
 		end++;
 	}
+	//ft_memdel((void**)&chunk->format);
+	//ft_memdel((void**)&chunk);
 }
 
 void	norm_trouble_maker(t_format *chunk)
