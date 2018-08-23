@@ -26,3 +26,6 @@ in C in a particularly relevant context as well as learn about a great example o
 ## Usage
 1. `make && make clean`
 2. Include libftprintf.a to your main file.
+
+## Final grade
+100/100
